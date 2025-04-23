@@ -1,0 +1,331 @@
+"""Config flow for Calendar merge helper."""
+
+from __future__ import annotations
+
+from collections.abc import Mapping
+from typing import Any, cast
+
+import voluptuous as vol
+
+from homeassistant.const import CONF_COUNTRY_CODE, CONF_NAME
+from homeassistant.core import callback
+from homeassistant.helpers import selector
+from homeassistant.helpers.schema_config_entry_flow import (
+    SchemaCommonFlowHandler,
+    SchemaConfigFlowHandler,
+    SchemaFlowFormStep,
+    SchemaFlowMenuStep,
+)
+from homeassistant.helpers.selector import (
+    CountrySelector,
+    NumberSelector,
+    NumberSelectorConfig,
+    NumberSelectorMode,
+)
+from homeassistant.util.uuid import random_uuid_hex
+
+from .const import (
+    CONF_FLEX_HOURS,
+    CONF_HOURLY_WAGE,
+    CONF_WORK_HOURS_FRI,
+    CONF_WORK_HOURS_MON,
+    CONF_WORK_HOURS_SAT,
+    CONF_WORK_HOURS_SUN,
+    CONF_WORK_HOURS_THU,
+    CONF_WORK_HOURS_TUE,
+    CONF_WORK_HOURS_WED,
+    DOMAIN,
+)
+
+
+async def _validate_input(
+    handler: SchemaCommonFlowHandler, user_input: dict[str, Any]
+) -> dict[str, Any]:
+    """Validate user input."""
+    # if len(user_input[CONF_CALENDAR_ENTITY_IDS]) == 0:
+    #     raise SchemaFlowError("missing_selection")
+
+    return user_input
+
+
+CONFIG_NAME = {
+    vol.Required(
+        CONF_NAME,
+    ): selector.TextSelector(),
+}
+
+CONFIG_OPTIONS = {
+    vol.Required(
+        CONF_COUNTRY_CODE,
+        default="DK",
+    ): CountrySelector(),
+    vol.Required(
+        CONF_WORK_HOURS_MON,
+        default=7.5,
+    ): NumberSelector(
+        NumberSelectorConfig(
+            min=0,
+            max=24,
+            step=0.5,
+            mode=NumberSelectorMode.BOX,
+        )
+    ),
+    vol.Required(
+        CONF_WORK_HOURS_TUE,
+        default=7.5,
+    ): NumberSelector(
+        NumberSelectorConfig(
+            min=0,
+            max=24,
+            step=0.5,
+            mode=NumberSelectorMode.BOX,
+        )
+    ),
+    vol.Required(
+        CONF_WORK_HOURS_WED,
+        default=7.5,
+    ): NumberSelector(
+        NumberSelectorConfig(
+            min=0,
+            max=24,
+            step=0.5,
+            mode=NumberSelectorMode.BOX,
+        )
+    ),
+    vol.Required(
+        CONF_WORK_HOURS_THU,
+        default=7.5,
+    ): NumberSelector(
+        NumberSelectorConfig(
+            min=0,
+            max=24,
+            step=0.5,
+            mode=NumberSelectorMode.BOX,
+        )
+    ),
+    vol.Required(
+        CONF_WORK_HOURS_FRI,
+        default=7.5,
+    ): NumberSelector(
+        NumberSelectorConfig(
+            min=0,
+            max=24,
+            step=0.5,
+            mode=NumberSelectorMode.BOX,
+        )
+    ),
+    vol.Required(
+        CONF_WORK_HOURS_SAT,
+        default=0.0,
+    ): NumberSelector(
+        NumberSelectorConfig(
+            min=0,
+            max=24,
+            step=0.5,
+            mode=NumberSelectorMode.BOX,
+        )
+    ),
+    vol.Required(
+        CONF_WORK_HOURS_SUN,
+        default=0.0,
+    ): NumberSelector(
+        NumberSelectorConfig(
+            min=0,
+            max=24,
+            step=0.5,
+            mode=NumberSelectorMode.BOX,
+        )
+    ),
+    vol.Required(
+        CONF_HOURLY_WAGE,
+        default=0,
+    ): NumberSelector(
+        NumberSelectorConfig(
+            min=-999,
+            max=999,
+            step=1,
+            mode=NumberSelectorMode.BOX,
+        )
+    ),
+}
+
+
+# ------------------------------------------------------------------
+async def config_options_dict(handler: SchemaCommonFlowHandler) -> dict:
+    """Return dict for the sensor options step."""
+
+    return {
+        vol.Required(
+            CONF_COUNTRY_CODE,
+            default=handler.parent_handler.hass.config.country,
+        ): CountrySelector(),
+        vol.Required(
+            CONF_WORK_HOURS_MON,
+            default=7.5,
+        ): NumberSelector(
+            NumberSelectorConfig(
+                min=0,
+                max=24,
+                step=0.5,
+                mode=NumberSelectorMode.BOX,
+            )
+        ),
+        vol.Required(
+            CONF_WORK_HOURS_TUE,
+            default=7.5,
+        ): NumberSelector(
+            NumberSelectorConfig(
+                min=0,
+                max=24,
+                step=0.5,
+                mode=NumberSelectorMode.BOX,
+            )
+        ),
+        vol.Required(
+            CONF_WORK_HOURS_WED,
+            default=7.5,
+        ): NumberSelector(
+            NumberSelectorConfig(
+                min=0,
+                max=24,
+                step=0.5,
+                mode=NumberSelectorMode.BOX,
+            )
+        ),
+        vol.Required(
+            CONF_WORK_HOURS_THU,
+            default=7.5,
+        ): NumberSelector(
+            NumberSelectorConfig(
+                min=0,
+                max=24,
+                step=0.5,
+                mode=NumberSelectorMode.BOX,
+            )
+        ),
+        vol.Required(
+            CONF_WORK_HOURS_FRI,
+            default=7.5,
+        ): NumberSelector(
+            NumberSelectorConfig(
+                min=0,
+                max=24,
+                step=0.5,
+                mode=NumberSelectorMode.BOX,
+            )
+        ),
+        vol.Required(
+            CONF_WORK_HOURS_SAT,
+            default=0.0,
+        ): NumberSelector(
+            NumberSelectorConfig(
+                min=0,
+                max=24,
+                step=0.5,
+                mode=NumberSelectorMode.BOX,
+            )
+        ),
+        vol.Required(
+            CONF_WORK_HOURS_SUN,
+            default=0.0,
+        ): NumberSelector(
+            NumberSelectorConfig(
+                min=0,
+                max=24,
+                step=0.5,
+                mode=NumberSelectorMode.BOX,
+            )
+        ),
+        vol.Required(
+            CONF_HOURLY_WAGE,
+            default=0,
+        ): NumberSelector(
+            NumberSelectorConfig(
+                min=0,
+                max=99999,
+                step=1.0,
+                mode=NumberSelectorMode.BOX,
+            )
+        ),
+        vol.Required(
+            CONF_FLEX_HOURS,
+            default=0,
+        ): NumberSelector(
+            NumberSelectorConfig(
+                min=0,
+                max=99999,
+                step=1.0,
+                mode=NumberSelectorMode.BOX,
+            )
+        ),
+    }
+
+
+# ------------------------------------------------------------------
+async def config_options_schema(handler: SchemaCommonFlowHandler) -> vol.Schema:
+    """Return schema for the sensor options step."""
+
+    return vol.Schema(await config_options_dict(handler))
+
+
+# ------------------------------------------------------------------
+async def config_schema(handler: SchemaCommonFlowHandler) -> vol.Schema:
+    """Return schema for the sensor options step."""
+
+    if handler.parent_handler.unique_id is None:
+        await handler.parent_handler.async_set_unique_id(random_uuid_hex())
+        handler.parent_handler._abort_if_unique_id_configured()  # noqa: SLF001
+        # tmp_dict = await config_options_dict(handler)
+    return vol.Schema({**CONFIG_NAME, **(await config_options_dict(handler))})
+
+
+# ------------------------------------------------------------------
+
+CONFIG_FLOW: dict[str, SchemaFlowFormStep | SchemaFlowMenuStep] = {
+    "user": SchemaFlowFormStep(
+        config_schema,
+        # vol.Schema(
+        #     {
+        #         **CONFIG_NAME,
+        #         **CONFIG_OPTIONS,
+        #     }
+        # ),
+        validate_user_input=_validate_input,
+    ),
+}
+
+OPTIONS_FLOW: dict[str, SchemaFlowFormStep | SchemaFlowMenuStep] = {
+    "init": SchemaFlowFormStep(
+        config_options_schema,
+        # vol.Schema(
+        #     {
+        #         **CONFIG_OPTIONS,
+        #     }
+        # ),
+        validate_user_input=_validate_input,
+    ),
+}
+
+
+# ------------------------------------------------------------------
+# ------------------------------------------------------------------
+class ConfigFlowHandler(SchemaConfigFlowHandler, domain=DOMAIN):
+    """Handle a config or options flow."""
+
+    config_flow = CONFIG_FLOW
+    options_flow = OPTIONS_FLOW
+
+    # ------------------------------------------------------------------
+    def async_config_entry_title(self, options: Mapping[str, Any]) -> str:
+        """Return config entry title."""
+
+        return cast(str, options[CONF_NAME])
+
+    # ------------------------------------------------------------------
+    @callback
+    def async_config_flow_finished(self, options: Mapping[str, Any]) -> None:
+        """Take necessary actions after the config flow is finished, if needed.
+
+        The options parameter contains config entry options, which is the union of user
+        input from the config flow steps.
+        """

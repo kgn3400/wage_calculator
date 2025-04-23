@@ -1,0 +1,20 @@
+{
+  "domain": "wage_calculator",
+  "name": "Wage calculator",
+  "codeowners": [
+    "@kgn3400"
+  ],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/kgn3400/wage_calculator",
+  "homekit": {},
+  "iot_class": "calculated",
+  "issue_tracker": "https://github.com/kgn3400/wage_calculator/issues",
+  "requirements": [
+    "holidays",
+    "babel"
+  ],
+  "ssdp": [],
+  "version": "1.0.0",
+  "zeroconf": []
+}

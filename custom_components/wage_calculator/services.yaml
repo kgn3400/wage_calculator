@@ -1,0 +1,55 @@
+# Service ID
+flex_hours_set:
+  target:
+    entity:
+      integration: wage_calculator
+      domain: sensor
+  fields:
+    flex_hours:
+      required: true
+      example: 0
+      # The default field value
+      default: 0
+      selector:
+        number:
+          min: -999
+          max: 999
+          unit_of_measurement: ""
+          mode: box
+          step: 1
+flex_hours_add:
+  target:
+    entity:
+      integration: wage_calculator
+      domain: sensor
+  fields:
+    flex_hours:
+      required: true
+      example: 0
+      # The default field value
+      default: 0
+      selector:
+        number:
+          min: 0
+          max: 999
+          unit_of_measurement: ""
+          mode: box
+          step: 1
+flex_hours_subtract:
+  target:
+    entity:
+      integration: wage_calculator
+      domain: sensor
+  fields:
+    flex_hours:
+      required: true
+      example: 0
+      # The default field value
+      default: 0
+      selector:
+        number:
+          min: 0
+          max: 999
+          unit_of_measurement: ""
+          mode: box
+          step: 1

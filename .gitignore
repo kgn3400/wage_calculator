@@ -1,0 +1,6 @@
+.DS_Store
+__pycache__/
+.vscode
+custom_components/.DS_Store
+custom_components/trafikmeldinger/eksempel_2.txt
+custom_components/trafikmeldinger/eksempel.json

@@ -1,0 +1,135 @@
+{
+  "title": "Timelønsberegner",
+  "entity_component": {
+    "_": {
+      "name": "Timelønsberegner"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "salary": {
+        "name": "Løn",
+        "state_attributes": {
+          "salary_before_today": {
+            "name": "Løn før i dag"
+          },
+          "salary_after_today": {
+            "name": "Løn efter i dag"
+          },
+          "total_hours": {
+            "name": "Total timer"
+          },
+          "total_hours_before_today": {
+            "name": "Total timer før i dag"
+          },
+          "total_hours_after_today": {
+            "name": "Total timer efter i dag"
+          },
+          "month_work_days": {
+            "name": "Månedens arbejdsdage"
+          },
+          "month_work_days_before_today": {
+            "name": "Månedens arbejdsdage før i dag"
+          },
+          "month_work_days_after_today": {
+            "name": "Månedens arbejdsdage efter i dag"
+          },
+          "flex_hours": {
+            "name": "Flex timer"
+          },
+          "markdown": {
+            "name": "Markdown"
+          }
+        }
+      }
+    }
+  },
+  "device": {
+    "wage_calculator": {
+      "name": "Timelønsberegner"
+    }
+  },
+  "config": {
+    "abort": {
+      "already_configured": "Enheden er allerede konfigureret"
+    },
+    "error": {
+      "unknown": "Uventet fejl"
+    },
+    "step": {
+      "user": {
+        "title": "Timelønsberegner",
+        "data": {
+          "name": "Entitets navn",
+          "country_code": "Land",
+          "work_hours_mon": "Arbejdstimer mandag",
+          "work_hours_tue": "Arbejdstimer tirsdag",
+          "work_hours_wed": "Arbejdstimer onsdag",
+          "work_hours_thu": "Arbejdstimer torsdag",
+          "work_hours_fri": "Arbejdstimer fredag",
+          "work_hours_sat": "Arbejdstimer lørdag",
+          "work_hours_sun": "Arbejdstimer søndag",
+          "hourly_wage": "Timeløn",
+          "flex_hours": "Flex timer"
+        }
+      }
+    }
+  },
+  "options": {
+    "abort": {
+      "already_configured": "Enheden er allerede konfigureret"
+    },
+    "error": {
+      "unknown": "Uventet fejl"
+    },
+    "step": {
+      "init": {
+        "title": "Timelønsberegner",
+        "data": {
+          "country_code": "Land",
+          "work_hours_mon": "Arbejdstimer mandag",
+          "work_hours_tue": "Arbejdstimer tirsdag",
+          "work_hours_wed": "Arbejdstimer onsdag",
+          "work_hours_thu": "Arbejdstimer torsdag",
+          "work_hours_fri": "Arbejdstimer fredag",
+          "work_hours_sat": "Arbejdstimer lørdag",
+          "work_hours_sun": "Arbejdstimer søndag",
+          "hourly_wage": "Timeløn",
+          "flex_hours": "Flex timer"
+        }
+      }
+    }
+  },
+  "services": {
+    "flex_hours_set": {
+      "description": "Sæt flex timer.",
+      "name": "Sæt",
+      "fields": {
+        "flex_hours": {
+          "description": "Flex timer.",
+          "name": "Flex timer"
+        }
+      }
+    },
+    "flex_hours_add": {
+      "description": "Tilføj flex timer.",
+      "name": "Tilføj",
+      "fields": {
+        "flex_hours": {
+          "description": "Flex timer.",
+          "name": "Flex timer"
+        }
+      }
+    },
+    "flex_hours_subtract": {
+      "description": "Fratræk flex timer.",
+      "name": "Fratræk",
+      "fields": {
+        "flex_hours": {
+          "description": "Flex timer.",
+          "name": "Flex timer"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "title": "Wage calculator",
+  "entity_component": {
+    "_": {
+      "name": "Wage calculator"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "salary": {
+        "name": "salary",
+        "state_attributes": {
+          "salary_before_today": {
+            "name": "Salary before today"
+          },
+          "salary_after_today": {
+            "name": "Salary after today"
+          },
+          "total_hours": {
+            "name": "Total hours"
+          },
+          "total_hours_before_today": {
+            "name": "Total hours before today"
+          },
+          "total_hours_after_today": {
+            "name": "Total hours after today"
+          },
+          "month_work_days": {
+            "name": "Month work days"
+          },
+          "month_work_days_before_today": {
+            "name": "Month work days before today"
+          },
+          "month_work_days_after_today": {
+            "name": "Month work days after today"
+          },
+          "flex_hours": {
+            "name": "Flex hours"
+          },
+          "markdown": {
+            "name": "Markdown"
+          }
+        }
+      }
+    }
+  },
+  "device": {
+    "wage_calculator": {
+      "name": "Wage calculator"
+    }
+  },
+  "config": {
+    "abort": {
+      "already_configured": "Device is already configured"
+    },
+    "error": {
+      "unknown": "Unexpected error"
+    },
+    "step": {
+      "user": {
+        "title": "Wage calculator",
+        "data": {
+          "name": "Entity name",
+          "country_code": "Country",
+          "work_hours_mon": "Work hours Monday",
+          "work_hours_tue": "Work hours Tuesday",
+          "work_hours_wed": "Work hours Wednesday",
+          "work_hours_thu": "Work hours Thursday",
+          "work_hours_fri": "Work hours Friday",
+          "work_hours_sat": "Work hours Saturday",
+          "work_hours_sun": "Work hours Sunday",
+          "hourly_wage": "Hourly wage",
+          "flex_hours": "Flex hours"
+        }
+      }
+    }
+  },
+  "options": {
+    "abort": {
+      "already_configured": "Device is already configured"
+    },
+    "error": {
+      "unknown": "Unexpected error"
+    },
+    "step": {
+      "init": {
+        "title": "Wage calculator",
+        "data": {
+          "country_code": "Country",
+          "work_hours_mon": "Work hours Monday",
+          "work_hours_tue": "Work hours Tuesday",
+          "work_hours_wed": "Work hours Wednesday",
+          "work_hours_thu": "Work hours Thursday",
+          "work_hours_fri": "Work hours Friday",
+          "work_hours_sat": "Work hours Saturday",
+          "work_hours_sun": "Work hours Sunday",
+          "hourly_wage": "Hourly wage",
+          "flex_hours": "Flex hours"
+        }
+      }
+    }
+  },
+  "services": {
+    "flex_hours_set": {
+      "description": "Set flex hours.",
+      "name": "Set",
+      "fields": {
+        "flex_hours": {
+          "description": "Flex hours.",
+          "name": "Flex hours"
+        }
+      }
+    },
+    "flex_hours_add": {
+      "description": "Add flex hours.",
+      "name": "Add",
+      "fields": {
+        "flex_hours": {
+          "description": "Flex hours.",
+          "name": "Flex hours"
+        }
+      }
+    },
+    "flex_hours_subtract": {
+      "description": "Subtract flex hours.",
+      "name": "Subtract",
+      "fields": {
+        "flex_hours": {
+          "description": "Flex hours.",
+          "name": "Flex hours"
+        }
+      }
+    }
+  }
+}
