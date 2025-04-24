@@ -70,7 +70,7 @@ class ComponentApi:
     async def async_update(self) -> None:
         """Update."""
 
-        await self.calc_monthly_wage.calculate()
+        self.calc_monthly_wage.calculate()
 
         self.markdown = await self.async_create_markdown()
 

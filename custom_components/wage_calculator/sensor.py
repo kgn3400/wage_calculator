@@ -29,14 +29,14 @@ async def async_setup_entry(
 
     sensors = []
 
-    sensors.append(MonthlyWorkSansor(hass, entry))
+    sensors.append(WageCalcSensor(hass, entry))
 
     async_add_entities(sensors)
 
 
 # ------------------------------------------------------
 # ------------------------------------------------------
-class MonthlyWorkSansor(ComponentEntity, SensorEntity):
+class WageCalcSensor(ComponentEntity, SensorEntity):
     """Sensor class for Wage calculator."""
 
     _unrecorded_attributes = frozenset({MATCH_ALL})
@@ -96,12 +96,12 @@ class MonthlyWorkSansor(ComponentEntity, SensorEntity):
             self.async_flex_hours_subtract,
         )
 
-        self.coordinator.setup_method = self.async_refresh
+        self.coordinator.update_method = self.async_refresh
         self.coordinator.update_interval = timedelta(minutes=15)
 
     # ------------------------------------------------------------------
     async def async_flex_hours_set(
-        self, entity: MonthlyWorkSansor, service_data: ServiceCall
+        self, entity: WageCalcSensor, service_data: ServiceCall
     ) -> None:
         """Set flex hours."""
 
@@ -114,7 +114,7 @@ class MonthlyWorkSansor(ComponentEntity, SensorEntity):
 
     # ------------------------------------------------------------------
     async def async_flex_hours_add(
-        self, entity: MonthlyWorkSansor, service_data: ServiceCall
+        self, entity: WageCalcSensor, service_data: ServiceCall
     ) -> None:
         """Add flex hours."""
 
@@ -126,7 +126,7 @@ class MonthlyWorkSansor(ComponentEntity, SensorEntity):
 
     # ------------------------------------------------------------------
     async def async_flex_hours_subtract(
-        self, entity: MonthlyWorkSansor, service_data: ServiceCall
+        self, entity: WageCalcSensor, service_data: ServiceCall
     ) -> None:
         """Add flex hours."""
         entity.component_api.calc_monthly_wage.flex_hours -= service_data.data.get(
@@ -227,7 +227,7 @@ class MonthlyWorkSansor(ComponentEntity, SensorEntity):
 
         await self.component_api.async_update()
 
-        self.async_write_ha_state()
+        # self.async_write_ha_state()
 
     # ------------------------------------------------------
     async def async_update(self) -> None:

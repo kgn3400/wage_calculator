@@ -252,8 +252,8 @@ async def config_options_dict(handler: SchemaCommonFlowHandler) -> dict:
             default=0,
         ): NumberSelector(
             NumberSelectorConfig(
-                min=0,
-                max=99999,
+                min=-999,
+                max=999,
                 step=1.0,
                 mode=NumberSelectorMode.BOX,
             )
