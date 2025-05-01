@@ -72,6 +72,12 @@
           "hourly_wage": "Timeløn",
           "flex_hours": "Flex timer"
         }
+      },
+      "unit_of_measurement": {
+        "data": {
+          "hours": "timer",
+          "currency": "kr."
+        }
       }
     }
   },
@@ -96,6 +102,12 @@
           "work_hours_sun": "Arbejdstimer søndag",
           "hourly_wage": "Timeløn",
           "flex_hours": "Flex timer"
+        }
+      },
+      "unit_of_measurement": {
+        "data": {
+          "hours": "timer",
+          "currency": "kr."
         }
       }
     }

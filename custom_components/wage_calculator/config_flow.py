@@ -19,7 +19,6 @@ from homeassistant.helpers.schema_config_entry_flow import (
 from homeassistant.helpers.selector import (
     CountrySelector,
     NumberSelector,
-    NumberSelectorConfig,
     NumberSelectorMode,
 )
 from homeassistant.util.uuid import random_uuid_hex
@@ -36,6 +35,7 @@ from .const import (
     CONF_WORK_HOURS_WED,
     DOMAIN,
 )
+from .hass_util import NumberSelectorConfigTranslate
 
 
 async def _validate_input(
@@ -54,101 +54,6 @@ CONFIG_NAME = {
     ): selector.TextSelector(),
 }
 
-CONFIG_OPTIONS = {
-    vol.Required(
-        CONF_COUNTRY_CODE,
-        default="DK",
-    ): CountrySelector(),
-    vol.Required(
-        CONF_WORK_HOURS_MON,
-        default=7.5,
-    ): NumberSelector(
-        NumberSelectorConfig(
-            min=0,
-            max=24,
-            step=0.5,
-            mode=NumberSelectorMode.BOX,
-        )
-    ),
-    vol.Required(
-        CONF_WORK_HOURS_TUE,
-        default=7.5,
-    ): NumberSelector(
-        NumberSelectorConfig(
-            min=0,
-            max=24,
-            step=0.5,
-            mode=NumberSelectorMode.BOX,
-        )
-    ),
-    vol.Required(
-        CONF_WORK_HOURS_WED,
-        default=7.5,
-    ): NumberSelector(
-        NumberSelectorConfig(
-            min=0,
-            max=24,
-            step=0.5,
-            mode=NumberSelectorMode.BOX,
-        )
-    ),
-    vol.Required(
-        CONF_WORK_HOURS_THU,
-        default=7.5,
-    ): NumberSelector(
-        NumberSelectorConfig(
-            min=0,
-            max=24,
-            step=0.5,
-            mode=NumberSelectorMode.BOX,
-        )
-    ),
-    vol.Required(
-        CONF_WORK_HOURS_FRI,
-        default=7.5,
-    ): NumberSelector(
-        NumberSelectorConfig(
-            min=0,
-            max=24,
-            step=0.5,
-            mode=NumberSelectorMode.BOX,
-        )
-    ),
-    vol.Required(
-        CONF_WORK_HOURS_SAT,
-        default=0.0,
-    ): NumberSelector(
-        NumberSelectorConfig(
-            min=0,
-            max=24,
-            step=0.5,
-            mode=NumberSelectorMode.BOX,
-        )
-    ),
-    vol.Required(
-        CONF_WORK_HOURS_SUN,
-        default=0.0,
-    ): NumberSelector(
-        NumberSelectorConfig(
-            min=0,
-            max=24,
-            step=0.5,
-            mode=NumberSelectorMode.BOX,
-        )
-    ),
-    vol.Required(
-        CONF_HOURLY_WAGE,
-        default=0,
-    ): NumberSelector(
-        NumberSelectorConfig(
-            min=-999,
-            max=999,
-            step=1,
-            mode=NumberSelectorMode.BOX,
-        )
-    ),
-}
-
 
 # ------------------------------------------------------------------
 async def config_options_dict(handler: SchemaCommonFlowHandler) -> dict:
@@ -163,100 +68,118 @@ async def config_options_dict(handler: SchemaCommonFlowHandler) -> dict:
             CONF_WORK_HOURS_MON,
             default=7.5,
         ): NumberSelector(
-            NumberSelectorConfig(
+            await NumberSelectorConfigTranslate(
+                handler.parent_handler.hass,
                 min=0,
                 max=24,
-                step=0.5,
+                step=1.0,
                 mode=NumberSelectorMode.BOX,
-            )
+                unit_of_measurement="hours",
+            )()
         ),
         vol.Required(
             CONF_WORK_HOURS_TUE,
             default=7.5,
         ): NumberSelector(
-            NumberSelectorConfig(
+            await NumberSelectorConfigTranslate(
+                handler.parent_handler.hass,
                 min=0,
                 max=24,
                 step=0.5,
                 mode=NumberSelectorMode.BOX,
-            )
+                unit_of_measurement="hours",
+            )(),
         ),
         vol.Required(
             CONF_WORK_HOURS_WED,
             default=7.5,
         ): NumberSelector(
-            NumberSelectorConfig(
+            await NumberSelectorConfigTranslate(
+                handler.parent_handler.hass,
                 min=0,
                 max=24,
                 step=0.5,
                 mode=NumberSelectorMode.BOX,
-            )
+                unit_of_measurement="hours",
+            )()
         ),
         vol.Required(
             CONF_WORK_HOURS_THU,
             default=7.5,
         ): NumberSelector(
-            NumberSelectorConfig(
+            await NumberSelectorConfigTranslate(
+                handler.parent_handler.hass,
                 min=0,
                 max=24,
                 step=0.5,
                 mode=NumberSelectorMode.BOX,
-            )
+                unit_of_measurement="hours",
+            )()
         ),
         vol.Required(
             CONF_WORK_HOURS_FRI,
             default=7.5,
         ): NumberSelector(
-            NumberSelectorConfig(
+            await NumberSelectorConfigTranslate(
+                handler.parent_handler.hass,
                 min=0,
                 max=24,
                 step=0.5,
                 mode=NumberSelectorMode.BOX,
-            )
+                unit_of_measurement="hours",
+            )()
         ),
         vol.Required(
             CONF_WORK_HOURS_SAT,
             default=0.0,
         ): NumberSelector(
-            NumberSelectorConfig(
+            await NumberSelectorConfigTranslate(
+                handler.parent_handler.hass,
                 min=0,
                 max=24,
                 step=0.5,
                 mode=NumberSelectorMode.BOX,
-            )
+                unit_of_measurement="hours",
+            )()
         ),
         vol.Required(
             CONF_WORK_HOURS_SUN,
             default=0.0,
         ): NumberSelector(
-            NumberSelectorConfig(
+            await NumberSelectorConfigTranslate(
+                handler.parent_handler.hass,
                 min=0,
                 max=24,
                 step=0.5,
                 mode=NumberSelectorMode.BOX,
-            )
+                unit_of_measurement="hours",
+            )()
         ),
         vol.Required(
             CONF_HOURLY_WAGE,
             default=0,
         ): NumberSelector(
-            NumberSelectorConfig(
+            await NumberSelectorConfigTranslate(
+                handler.parent_handler.hass,
                 min=0,
                 max=99999,
                 step=1.0,
                 mode=NumberSelectorMode.BOX,
-            )
+                unit_of_measurement=handler.parent_handler.hass.config.currency,
+            )()
         ),
         vol.Required(
             CONF_FLEX_HOURS,
             default=0,
         ): NumberSelector(
-            NumberSelectorConfig(
+            await NumberSelectorConfigTranslate(
+                handler.parent_handler.hass,
                 min=-999,
                 max=999,
                 step=1.0,
                 mode=NumberSelectorMode.BOX,
-            )
+                unit_of_measurement="hours",
+            )()
         ),
     }
 
@@ -284,12 +207,6 @@ async def config_schema(handler: SchemaCommonFlowHandler) -> vol.Schema:
 CONFIG_FLOW: dict[str, SchemaFlowFormStep | SchemaFlowMenuStep] = {
     "user": SchemaFlowFormStep(
         config_schema,
-        # vol.Schema(
-        #     {
-        #         **CONFIG_NAME,
-        #         **CONFIG_OPTIONS,
-        #     }
-        # ),
         validate_user_input=_validate_input,
     ),
 }
@@ -297,11 +214,6 @@ CONFIG_FLOW: dict[str, SchemaFlowFormStep | SchemaFlowMenuStep] = {
 OPTIONS_FLOW: dict[str, SchemaFlowFormStep | SchemaFlowMenuStep] = {
     "init": SchemaFlowFormStep(
         config_options_schema,
-        # vol.Schema(
-        #     {
-        #         **CONFIG_OPTIONS,
-        #     }
-        # ),
         validate_user_input=_validate_input,
     ),
 }

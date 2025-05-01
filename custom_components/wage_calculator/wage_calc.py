@@ -1,11 +1,14 @@
 """Wage calc."""
 
 from calendar import monthrange, weekday
-from datetime import date
+from datetime import UTC, date, datetime, time, timedelta
 
 from holidays import HolidayBase, country_holidays
 
 from homeassistant.core import HomeAssistant
+from homeassistant.util import dt as dt_util
+
+from .hass_util import async_hass_add_executor_job
 
 
 # ------------------------------------------------------------------
@@ -17,35 +20,39 @@ class WageCalc:
         self,
         hass: HomeAssistant,
         weekly_work_hours: list[float] | None = None,
-        mon_hours: float = 0.0,
-        tue_hours: float = 0.0,
-        wed_hours: float = 0.0,
-        thu_hours: float = 0.0,
-        fri_hours: float = 0.0,
-        sat_hours: float = 0.0,
-        sun_hours: float = 0.0,
+        mon_work_hours: float = 0.0,
+        tue_work_hours: float = 0.0,
+        wed_work_hours: float = 0.0,
+        thu_work_hours: float = 0.0,
+        fri_work_hours: float = 0.0,
+        sat_work_hours: float = 0.0,
+        sun_work_hours: float = 0.0,
         hourly_wage: float = 0.0,
         flex_hours: float = 0.0,
         country: str = "DK",
+        hourly_update: bool = True,
+        work_starts_at: time = time(hour=9, minute=0, second=0),
     ) -> None:
         """Initialize WageCalc."""
 
         self.hass: HomeAssistant = hass
-        self.country: str = country
 
         if weekly_work_hours is not None:
             self.weekly_work_hours: list[float] = weekly_work_hours
         else:
             self.weekly_work_hours = [
-                mon_hours,
-                tue_hours,
-                wed_hours,
-                thu_hours,
-                fri_hours,
-                sat_hours,
-                sun_hours,
+                mon_work_hours,
+                tue_work_hours,
+                wed_work_hours,
+                thu_work_hours,
+                fri_work_hours,
+                sat_work_hours,
+                sun_work_hours,
             ]
         self._flex_hours: float = flex_hours
+        self._country: str = country
+        self._hourly_update: bool = hourly_update
+        self._work_starts_at: bool = work_starts_at
         self._same_month_year: bool = False
 
         self.month_work_days: int = 0
@@ -62,34 +69,61 @@ class WageCalc:
         self.holidays: HolidayBase = None
         self.salary: float = 0.0
         self.salary_before_today: float = 0.0
+        self.salery_before_today_with_hourly_update: float = 0.0
         self.salary_after_today: float = 0.0
 
     # ------------------------------------------------------------------
     async def async_init(self) -> None:
         """Initialize the component."""
-        self.holidays = await self.hass.async_add_executor_job(
-            country_holidays, self.country
-        )
+
+        await self.get_holidays(self._country)
+
         self.calculate()
+
+    # ------------------------------------------------------------------
+    @async_hass_add_executor_job()
+    def get_holidays(self, country: str) -> None:
+        """Get holidays."""
+
+        self.holidays = country_holidays(country)
 
     # ------------------------------------------------------------------
     def calculate(self, year: int = 0, month: int = 0) -> None:
         """Calculate work hours."""
 
         self._same_month_year = False
+        today_hours: float = 0.0
 
         if year == 0 or month == 0:
             self.year = date.today().year
             self.month = date.today().month
             self.day = date.today().day
-            self._same_month_year = True
         else:
             self.year = year
             self.month = month
 
-            if self.year == date.today().year and self.month == date.today().month:
-                self._same_month_year = True
-                self.day = date.today().day
+        if self.year == date.today().year and self.month == date.today().month:
+            self._same_month_year = True
+            self.day = date.today().day
+
+            if self._work_starts_at:
+                tmp_todays_work_hours: timedelta = dt_util.as_local(
+                    datetime.now(UTC)
+                ) - dt_util.as_local(
+                    datetime.combine(date.today(), self._work_starts_at)
+                )
+                today_hours: float = tmp_todays_work_hours.total_seconds() // 3600 + (
+                    int(
+                        ((tmp_todays_work_hours.total_seconds() % 3600) // 60)
+                        * 1.6666666667
+                    )
+                    / 100
+                )
+
+                today_hours = min(
+                    today_hours,
+                    self.weekly_work_hours[weekday(self.year, self.month, self.day)],
+                )
 
         self.month_work_days = 0
         self.total_hours = 0.0
@@ -124,6 +158,9 @@ class WageCalc:
         self.total_hours += self._flex_hours
         self.salary = self.total_hours * self.hourly_wage
         self.salary_before_today = self.total_hours_before_today * self.hourly_wage
+        self.salery_before_today_with_hourly_update = (
+            self.total_hours_before_today + today_hours
+        ) * self.hourly_wage
         self.salary_after_today = self.total_hours_after_today * self.hourly_wage
 
     # ------------------------------------------------------------------

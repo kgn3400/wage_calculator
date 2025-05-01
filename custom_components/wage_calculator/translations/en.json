@@ -72,6 +72,12 @@
           "hourly_wage": "Hourly wage",
           "flex_hours": "Flex hours"
         }
+      },
+      "unit_of_measurement": {
+        "data": {
+          "hours": "hours",
+          "currency": "usd."
+        }
       }
     }
   },
@@ -96,6 +102,12 @@
           "work_hours_sun": "Work hours Sunday",
           "hourly_wage": "Hourly wage",
           "flex_hours": "Flex hours"
+        }
+      },
+      "unit_of_measurement": {
+        "data": {
+          "hours": "hours",
+          "currency": "usd."
         }
       }
     }
