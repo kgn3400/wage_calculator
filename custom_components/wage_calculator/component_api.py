@@ -74,20 +74,23 @@ class ComponentApi:
 
     @async_hass_add_executor_job()
     # ------------------------------------------------------------------
-    def format_decimal(self, number: float) -> str:
+    def format_decimal(self, number: float, format: str = "#,###,##0.00") -> str:
         """Format decimal."""
 
-        return format_decimal(
-            number, format="#,###,##0.00", locale=self.hass.config.language
-        )
+        return format_decimal(number, format=format, locale=self.hass.config.language)
 
     # -------------------------------------------------------------------
     async def async_create_markdown(self) -> None:
         """Create markdown."""
 
+        tmp_hours: str = ""
+
+        if self.calc_monthly_wage.today_hours > 0:
+            tmp_hours = f"og **{await self.format_decimal(self.calc_monthly_wage.today_hours, '#,###,##0.0')}** timer i dag "
+
         return (
             f"### Månedsløn\n"
-            f"**{self.calc_monthly_wage.month_work_days_before_today}** dage af arbejdsmåneden er gået og der er tjent:\n"
+            f"**{self.calc_monthly_wage.month_work_days_before_today}** dage {tmp_hours}af arbejdsmåneden er gået og der er tjent:\n"
             f"&nbsp;&nbsp;&nbsp;&nbsp;**{await self.format_decimal(self.calc_monthly_wage.salery_before_today_with_hourly_update)}** Kr.\n\n"
             f"Efter de næste **{self.calc_monthly_wage.month_work_days_after_today}** arbejdsdage er der tjent ialt:\n"
             f"&nbsp;&nbsp;&nbsp;&nbsp;**{await self.format_decimal(self.calc_monthly_wage.salary)}** Kr."

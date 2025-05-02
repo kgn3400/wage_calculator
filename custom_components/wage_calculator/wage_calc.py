@@ -71,6 +71,7 @@ class WageCalc:
         self.salary_before_today: float = 0.0
         self.salery_before_today_with_hourly_update: float = 0.0
         self.salary_after_today: float = 0.0
+        self.today_hours: float = 0.0
 
     # ------------------------------------------------------------------
     async def async_init(self) -> None:
@@ -92,7 +93,7 @@ class WageCalc:
         """Calculate work hours."""
 
         self._same_month_year = False
-        today_hours: float = 0.0
+        self.today_hours = 0.0
 
         if year == 0 or month == 0:
             self.year = date.today().year
@@ -112,17 +113,25 @@ class WageCalc:
                 ) - dt_util.as_local(
                     datetime.combine(date.today(), self._work_starts_at)
                 )
-                today_hours: float = tmp_todays_work_hours.total_seconds() // 3600 + (
-                    int(
-                        ((tmp_todays_work_hours.total_seconds() % 3600) // 60)
-                        * 1.6666666667
+                self.today_hours: float = (
+                    tmp_todays_work_hours.total_seconds() // 3600
+                    + (
+                        int(
+                            ((tmp_todays_work_hours.total_seconds() % 3600) // 60)
+                            * 1.6666666667
+                        )
+                        / 100
                     )
-                    / 100
                 )
 
-                today_hours = min(
-                    today_hours,
-                    self.weekly_work_hours[weekday(self.year, self.month, self.day)],
+                self.today_hours = max(
+                    0,
+                    min(
+                        self.today_hours,
+                        self.weekly_work_hours[
+                            weekday(self.year, self.month, self.day)
+                        ],
+                    ),
                 )
 
         self.month_work_days = 0
@@ -159,7 +168,7 @@ class WageCalc:
         self.salary = self.total_hours * self.hourly_wage
         self.salary_before_today = self.total_hours_before_today * self.hourly_wage
         self.salery_before_today_with_hourly_update = (
-            self.total_hours_before_today + today_hours
+            self.total_hours_before_today + self.today_hours
         ) * self.hourly_wage
         self.salary_after_today = self.total_hours_after_today * self.hourly_wage
 
