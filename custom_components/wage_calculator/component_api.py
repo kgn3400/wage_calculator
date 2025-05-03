@@ -12,6 +12,7 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from .const import (
     CONF_FLEX_HOURS,
     CONF_HOURLY_WAGE,
+    CONF_UPDATE_CONTINUOUSLY,
     CONF_WORK_HOURS_FRI,
     CONF_WORK_HOURS_MON,
     CONF_WORK_HOURS_SAT,
@@ -19,6 +20,13 @@ from .const import (
     CONF_WORK_HOURS_THU,
     CONF_WORK_HOURS_TUE,
     CONF_WORK_HOURS_WED,
+    CONF_WORK_STARTS_FRI,
+    CONF_WORK_STARTS_MON,
+    CONF_WORK_STARTS_SAT,
+    CONF_WORK_STARTS_SUN,
+    CONF_WORK_STARTS_THU,
+    CONF_WORK_STARTS_TUE,
+    CONF_WORK_STARTS_WED,
 )
 from .hass_util import async_hass_add_executor_job
 from .wage_calc import WageCalc
@@ -43,16 +51,28 @@ class ComponentApi:
 
         self.calc_monthly_wage: WageCalc = WageCalc(
             hass,
-            mon_work_hours=entry.options.get(CONF_WORK_HOURS_MON, 0.0),
-            tue_work_hours=entry.options.get(CONF_WORK_HOURS_TUE, 0.0),
-            wed_work_hours=entry.options.get(CONF_WORK_HOURS_WED, 0.0),
-            thu_work_hours=entry.options.get(CONF_WORK_HOURS_THU, 0.0),
-            fri_work_hours=entry.options.get(CONF_WORK_HOURS_FRI, 0.0),
-            sat_work_hours=entry.options.get(CONF_WORK_HOURS_SAT, 0.0),
-            sun_work_hours=entry.options.get(CONF_WORK_HOURS_SUN, 0.0),
+            [
+                entry.options.get(CONF_WORK_HOURS_MON, 0.0),
+                entry.options.get(CONF_WORK_HOURS_TUE, 0.0),
+                entry.options.get(CONF_WORK_HOURS_WED, 0.0),
+                entry.options.get(CONF_WORK_HOURS_THU, 0.0),
+                entry.options.get(CONF_WORK_HOURS_FRI, 0.0),
+                entry.options.get(CONF_WORK_HOURS_SAT, 0.0),
+                entry.options.get(CONF_WORK_HOURS_SUN, 0.0),
+            ],
+            [
+                entry.options.get(CONF_WORK_STARTS_MON, "00:00:00"),
+                entry.options.get(CONF_WORK_STARTS_TUE, "00:00:00"),
+                entry.options.get(CONF_WORK_STARTS_WED, "00:00:00"),
+                entry.options.get(CONF_WORK_STARTS_THU, "00:00:00"),
+                entry.options.get(CONF_WORK_STARTS_FRI, "00:00:00"),
+                entry.options.get(CONF_WORK_STARTS_SAT, "00:00:00"),
+                entry.options.get(CONF_WORK_STARTS_SUN, "00:00:00"),
+            ],
             hourly_wage=entry.options.get(CONF_HOURLY_WAGE, 0.0),
             flex_hours=entry.options.get(CONF_FLEX_HOURS, 0.0),
             country=entry.options.get(CONF_COUNTRY_CODE, "DK"),
+            update_continuously=entry.options.get(CONF_UPDATE_CONTINUOUSLY, False),
         )
 
         self.markdown: str = ""

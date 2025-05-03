@@ -19,40 +19,26 @@ class WageCalc:
     def __init__(
         self,
         hass: HomeAssistant,
-        weekly_work_hours: list[float] | None = None,
-        mon_work_hours: float = 0.0,
-        tue_work_hours: float = 0.0,
-        wed_work_hours: float = 0.0,
-        thu_work_hours: float = 0.0,
-        fri_work_hours: float = 0.0,
-        sat_work_hours: float = 0.0,
-        sun_work_hours: float = 0.0,
+        weekly_work_hours: list[float],
+        weekly_work_starts_at: list[str],
         hourly_wage: float = 0.0,
         flex_hours: float = 0.0,
         country: str = "DK",
-        hourly_update: bool = True,
-        work_starts_at: time = time(hour=9, minute=0, second=0),
+        update_continuously: bool = True,
     ) -> None:
         """Initialize WageCalc."""
 
         self.hass: HomeAssistant = hass
 
-        if weekly_work_hours is not None:
-            self.weekly_work_hours: list[float] = weekly_work_hours
-        else:
-            self.weekly_work_hours = [
-                mon_work_hours,
-                tue_work_hours,
-                wed_work_hours,
-                thu_work_hours,
-                fri_work_hours,
-                sat_work_hours,
-                sun_work_hours,
-            ]
+        self._weekly_work_hours: list[float] = weekly_work_hours
+
         self._flex_hours: float = flex_hours
         self._country: str = country
-        self._hourly_update: bool = hourly_update
-        self._work_starts_at: bool = work_starts_at
+        self._update_continuously: bool = update_continuously
+        self._weekly_work_starts_at: time = [
+            datetime.strptime(t, "%H:%M:%S").time() for t in weekly_work_starts_at
+        ]
+
         self._same_month_year: bool = False
 
         self.month_work_days: int = 0
@@ -107,12 +93,18 @@ class WageCalc:
             self._same_month_year = True
             self.day = date.today().day
 
-            if self._work_starts_at:
+            if self._update_continuously:
                 tmp_todays_work_hours: timedelta = dt_util.as_local(
                     datetime.now(UTC)
                 ) - dt_util.as_local(
-                    datetime.combine(date.today(), self._work_starts_at)
+                    datetime.combine(
+                        date.today(),
+                        self._weekly_work_starts_at[
+                            weekday(self.year, self.month, self.day)
+                        ],
+                    )
                 )
+
                 self.today_hours: float = (
                     tmp_todays_work_hours.total_seconds() // 3600
                     + (
@@ -128,7 +120,7 @@ class WageCalc:
                     0,
                     min(
                         self.today_hours,
-                        self.weekly_work_hours[
+                        self._weekly_work_hours[
                             weekday(self.year, self.month, self.day)
                         ],
                     ),
@@ -149,7 +141,7 @@ class WageCalc:
         for day in range(1, cal[1] + 1):
             if date(self.year, self.month, day) not in self.holidays:
                 if (
-                    day_work_hours := self.weekly_work_hours[
+                    day_work_hours := self._weekly_work_hours[
                         weekday(self.year, self.month, day)
                     ]
                 ) != 0.0:

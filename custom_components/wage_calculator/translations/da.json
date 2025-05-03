@@ -62,15 +62,33 @@
         "data": {
           "name": "Entitets navn",
           "country_code": "Land",
+          "hourly_wage": "Timeløn",
+          "flex_hours": "Flex timer",
+          "update_continuously": "Opdater løbende"
+        }
+      },
+      "user_work_days": {
+        "title": "Timelønsberegner",
+        "data": {
           "work_hours_mon": "Arbejdstimer mandag",
           "work_hours_tue": "Arbejdstimer tirsdag",
           "work_hours_wed": "Arbejdstimer onsdag",
           "work_hours_thu": "Arbejdstimer torsdag",
           "work_hours_fri": "Arbejdstimer fredag",
           "work_hours_sat": "Arbejdstimer lørdag",
-          "work_hours_sun": "Arbejdstimer søndag",
-          "hourly_wage": "Timeløn",
-          "flex_hours": "Flex timer"
+          "work_hours_sun": "Arbejdstimer søndag"
+        }
+      },
+      "user_work_starts": {
+        "title": "Timelønsberegner",
+        "data": {
+          "work_starts_mon": "Arbejdsstart mandag",
+          "work_starts_tue": "Arbejdsstart tirsdag",
+          "work_starts_wed": "Arbejdsstart onsdag",
+          "work_starts_thu": "Arbejdsstart torsdag",
+          "work_starts_fri": "Arbejdsstart fredag",
+          "work_starts_sat": "Arbejdsstart lørdag",
+          "work_starts_sun": "Arbejdsstart søndag"
         }
       },
       "unit_of_measurement": {
@@ -93,15 +111,33 @@
         "title": "Timelønsberegner",
         "data": {
           "country_code": "Land",
+          "hourly_wage": "Timeløn",
+          "flex_hours": "Flex timer",
+          "update_continuously": "Opdater løbende"
+        }
+      },
+      "init_work_days": {
+        "title": "Timelønsberegner",
+        "data": {
           "work_hours_mon": "Arbejdstimer mandag",
           "work_hours_tue": "Arbejdstimer tirsdag",
           "work_hours_wed": "Arbejdstimer onsdag",
           "work_hours_thu": "Arbejdstimer torsdag",
           "work_hours_fri": "Arbejdstimer fredag",
           "work_hours_sat": "Arbejdstimer lørdag",
-          "work_hours_sun": "Arbejdstimer søndag",
-          "hourly_wage": "Timeløn",
-          "flex_hours": "Flex timer"
+          "work_hours_sun": "Arbejdstimer søndag"
+        }
+      },
+      "user_work_starts": {
+        "title": "Timelønsberegner",
+        "data": {
+          "work_starts_mon": "Arbejdsstart mandag",
+          "work_starts_tue": "Arbejdsstart tirsdag",
+          "work_starts_wed": "Arbejdsstart onsdag",
+          "work_starts_thu": "Arbejdsstart torsdag",
+          "work_starts_fri": "Arbejdsstart fredag",
+          "work_starts_sat": "Arbejdsstart lørdag",
+          "work_starts_sun": "Arbejdsstart søndag"
         }
       },
       "unit_of_measurement": {

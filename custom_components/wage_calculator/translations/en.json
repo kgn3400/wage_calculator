@@ -62,15 +62,33 @@
         "data": {
           "name": "Entity name",
           "country_code": "Country",
+          "hourly_wage": "Hourly wage",
+          "flex_hours": "Flex hours",
+          "update_continuously": "Update continuously"
+        }
+      },
+      "user_work_days": {
+        "title": "Wage calculator",
+        "data": {
           "work_hours_mon": "Work hours Monday",
           "work_hours_tue": "Work hours Tuesday",
           "work_hours_wed": "Work hours Wednesday",
           "work_hours_thu": "Work hours Thursday",
           "work_hours_fri": "Work hours Friday",
           "work_hours_sat": "Work hours Saturday",
-          "work_hours_sun": "Work hours Sunday",
-          "hourly_wage": "Hourly wage",
-          "flex_hours": "Flex hours"
+          "work_hours_sun": "Work hours Sunday"
+        }
+      },
+      "user_work_starts": {
+        "title": "Wage calculator",
+        "data": {
+          "work_starts_mon": "Work starts at Monday",
+          "work_starts_tue": "Work starts at Tuesday",
+          "work_starts_wed": "Work starts at Wednesday",
+          "work_starts_thu": "Work starts at Thursday",
+          "work_starts_fri": "Work starts at Friday",
+          "work_starts_sat": "Work starts at Saturday",
+          "work_starts_sun": "Work starts at Sunday"
         }
       },
       "unit_of_measurement": {
@@ -93,15 +111,33 @@
         "title": "Wage calculator",
         "data": {
           "country_code": "Country",
+          "hourly_wage": "Hourly wage",
+          "flex_hours": "Flex hours",
+          "update_continuously": "Update continuously"
+        }
+      },
+      "init_work_days": {
+        "title": "Wage calculator",
+        "data": {
           "work_hours_mon": "Work hours Monday",
           "work_hours_tue": "Work hours Tuesday",
           "work_hours_wed": "Work hours Wednesday",
           "work_hours_thu": "Work hours Thursday",
           "work_hours_fri": "Work hours Friday",
           "work_hours_sat": "Work hours Saturday",
-          "work_hours_sun": "Work hours Sunday",
-          "hourly_wage": "Hourly wage",
-          "flex_hours": "Flex hours"
+          "work_hours_sun": "Work hours Sunday"
+        }
+      },
+      "user_work_starts": {
+        "title": "Wage calculator",
+        "data": {
+          "work_starts_mon": "Work starts at Monday",
+          "work_starts_tue": "Work starts at Tuesday",
+          "work_starts_wed": "Work starts at Wednesday",
+          "work_starts_thu": "Work starts at Thursday",
+          "work_starts_fri": "Work starts at Friday",
+          "work_starts_sat": "Work starts at Saturday",
+          "work_starts_sun": "Work starts at Sunday"
         }
       },
       "unit_of_measurement": {
