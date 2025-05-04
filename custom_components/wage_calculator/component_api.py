@@ -7,6 +7,7 @@ from babel.numbers import format_decimal
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_COUNTRY_CODE
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers.template import Template
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 from .const import (
@@ -28,7 +29,7 @@ from .const import (
     CONF_WORK_STARTS_TUE,
     CONF_WORK_STARTS_WED,
 )
-from .hass_util import async_hass_add_executor_job
+from .hass_util import Translate, async_hass_add_executor_job
 from .wage_calc import WageCalc
 
 
@@ -81,6 +82,20 @@ class ComponentApi:
     async def async_init(self) -> None:
         """Init."""
 
+        self._md_today_hours_template: str = await Translate(
+            self.hass
+        ).async_get_localized_str(
+            "defaults.default_md_today_hours_template",
+            file_name="_defaults.json",
+        )
+
+        self._default_md_txt_template: str = await Translate(
+            self.hass
+        ).async_get_localized_str(
+            "defaults.default_md_txt_template",
+            file_name="_defaults.json",
+        )
+
         await self.calc_monthly_wage.async_init()
         self.markdown = await self.async_create_markdown()
 
@@ -106,12 +121,35 @@ class ComponentApi:
         tmp_hours: str = ""
 
         if self.calc_monthly_wage.today_hours > 0:
-            tmp_hours = f"og **{await self.format_decimal(self.calc_monthly_wage.today_hours, '#,###,##0.0')}** timer i dag "
+            value_template: Template | None = Template(
+                self._md_today_hours_template, self.hass
+            )
+            tmp_hours = (
+                value_template.async_render(
+                    {
+                        "today_hours": await self.format_decimal(
+                            self.calc_monthly_wage.today_hours, "#,###,##0.0"
+                        )
+                    }
+                )
+                + " "
+            )
 
-        return (
-            f"### Månedsløn\n"
-            f"**{self.calc_monthly_wage.month_work_days_before_today}** dage {tmp_hours}af arbejdsmåneden er gået og der er tjent:\n"
-            f"&nbsp;&nbsp;&nbsp;&nbsp;**{await self.format_decimal(self.calc_monthly_wage.salery_before_today_with_hourly_update)}** Kr.\n\n"
-            f"Efter de næste **{self.calc_monthly_wage.month_work_days_after_today}** arbejdsdage er der tjent ialt:\n"
-            f"&nbsp;&nbsp;&nbsp;&nbsp;**{await self.format_decimal(self.calc_monthly_wage.salary)}** Kr."
+        values: dict = {
+            "tmp_hours": tmp_hours,
+            "today_hours": await self.format_decimal(
+                self.calc_monthly_wage.today_hours, "#,###,##0.0"
+            ),
+            "month_work_days_before_today": self.calc_monthly_wage.month_work_days_before_today,
+            "salery_before_today_with_hourly_update": await self.format_decimal(
+                self.calc_monthly_wage.salery_before_today_with_hourly_update
+            ),
+            "month_work_days_after_today": self.calc_monthly_wage.month_work_days_after_today,
+            "salary": await self.format_decimal(self.calc_monthly_wage.salary),
+        }
+
+        value_template: Template | None = Template(
+            self._default_md_txt_template, self.hass
         )
+
+        return value_template.async_render(values)
