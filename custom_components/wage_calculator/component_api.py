@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 
-from babel.numbers import format_decimal
+from babel.numbers import format_decimal, get_currency_symbol
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_COUNTRY_CODE
@@ -96,8 +96,18 @@ class ComponentApi:
             file_name="_defaults.json",
         )
 
+        self._currency_sign: str = await self.get_currency_symb()
         await self.calc_monthly_wage.async_init()
         self.markdown = await self.async_create_markdown()
+
+    # -------------------------------------------------------------------
+    @async_hass_add_executor_job()
+    def get_currency_symb(self) -> str:
+        """Get currency symbol."""
+
+        return get_currency_symbol(
+            self.hass.config.currency, locale=self.hass.config.language
+        )
 
     # -------------------------------------------------------------------
     async def async_update(self) -> None:
@@ -136,6 +146,8 @@ class ComponentApi:
             )
 
         values: dict = {
+            "currency": self.hass.config.currency,
+            "currency_sign": self._currency_sign,
             "tmp_hours": tmp_hours,
             "today_hours": await self.format_decimal(
                 self.calc_monthly_wage.today_hours, "#,###,##0.0"
