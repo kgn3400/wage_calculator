@@ -1,6 +1,6 @@
 {
   "defaults": {
     "default_md_today_hours_template": "og **{{ today_hours }}** timer i dag ",
-    "default_md_txt_template": "**{{ month_work_days_before_today }}** dage {{ tmp_hours }}af arbejdsmåneden er gået og der er tjent:\n&nbsp;&nbsp;&nbsp;&nbsp;**{{salery_before_today_with_hourly_update }}** {{ currency_sign }}\n\nEfter de næste **{{ month_work_days_after_today }}** arbejdsdage er der tjent ialt:\n&nbsp;&nbsp;&nbsp;&nbsp;**{{ salary }}** {{ currency_sign }}"
+    "default_md_txt_template": "<font color= dodgerblue> <ha-icon icon='mdi:account-hard-hat-outline'></ha-icon></font> **{{ month_work_days_before_today }}** dage {{ tmp_hours }}af arbejdsmåneden er gået og der er tjent:\n&nbsp;&nbsp;&nbsp;&nbsp;**{{salery_before_today_with_hourly_update }}** {{ currency_sign }}\n\n<font color= dodgerblue> <ha-icon icon='mdi:account-hard-hat'></ha-icon></font>Efter de næste **{{ month_work_days_after_today }}** arbejdsdage er der tjent ialt:\n&nbsp;&nbsp;&nbsp;&nbsp;**{{ salary }}** {{ currency_sign }}"
   }
 }
