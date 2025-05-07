@@ -85,18 +85,18 @@ class ComponentApi:
         self._md_today_hours_template: str = await Translate(
             self.hass
         ).async_get_localized_str(
-            "defaults.default_md_today_hours_template",
+            "defaults.default_md_today_hours_monthly_template",
             file_name="_defaults.json",
         )
 
         self._default_md_txt_template: str = await Translate(
             self.hass
         ).async_get_localized_str(
-            "defaults.default_md_txt_template",
+            "defaults.default_md_txt_monthly_template",
             file_name="_defaults.json",
         )
 
-        self._currency_sign: str = await self.get_currency_symb()
+        self.currency_sign: str = await self.get_currency_symb()
         await self.calc_monthly_wage.async_init()
         self.markdown = await self.async_create_markdown()
 
@@ -147,7 +147,7 @@ class ComponentApi:
 
         values: dict = {
             "currency": self.hass.config.currency,
-            "currency_sign": self._currency_sign,
+            "currency_sign": self.currency_sign,
             "tmp_hours": tmp_hours,
             "today_hours": await self.format_decimal(
                 self.calc_monthly_wage.today_hours, "#,###,##0.0"

@@ -115,25 +115,41 @@ class HandleRetries:
                 return False
 
             # -------------------------
+            def check_exceptions(exp: Exception, attempt: int):
+                """Check exceptions."""
+
+                if exp.__class__ == RetryStopException:
+                    raise exp
+                if (
+                    not check_retry_on_exceptions(exp)
+                    or check_stop_on_exceptions(exp)
+                    or attempt == self.retries - 1
+                ):
+                    if self.raise_last_exception:
+                        if self.raise_original_exception:
+                            raise exp
+                        raise HandleRetriesException(
+                            f"Retry {attempt} failed for {func.__name__}"
+                        ) from exp
+
+            # -------------------------
+            def check_for_dyn_parms(func):
+                """Check dynamic parameters."""
+
+            # -------------------------
+            async def async_check_for_dyn_parms(func):
+                """Check dynamic parameters."""
+
+            # -------------------------
             @wraps(func)
             def wrapper(*args, **kwargs):
+                check_for_dyn_parms(func)
+
                 for attempt in range(self.retries):
                     try:
                         return func(*args, **kwargs)
-                    except RetryStopException:
-                        raise
-                    except Exception as err:
-                        if (
-                            not check_retry_on_exceptions(err)
-                            or check_stop_on_exceptions(err)
-                            or attempt == self.retries - 1
-                        ):
-                            if self.raise_last_exception:
-                                if self.raise_original_exception:
-                                    raise
-                                raise HandleRetriesException(
-                                    f"Retry {attempt} failed for {func.__name__}"
-                                ) from err
+                    except Exception as err:  # noqa: BLE001
+                        check_exceptions(err, attempt)
 
                     sleep(self.retry_delay)
                 return None
@@ -141,23 +157,14 @@ class HandleRetries:
             # -------------------------
             @wraps(func)
             async def async_wrapper(*args, **kwargs):
+                await async_check_for_dyn_parms(func)
+
                 for attempt in range(self.retries):
                     try:
                         return await func(*args, **kwargs)
-                    except RetryStopException:
-                        raise
-                    except Exception as err:
-                        if (
-                            not check_retry_on_exceptions(err)
-                            or check_stop_on_exceptions(err)
-                            or attempt == self.retries - 1
-                        ):
-                            if self.raise_last_exception:
-                                if self.raise_original_exception:
-                                    raise
-                                raise HandleRetriesException(
-                                    f"Retry {attempt} failed for {func.__name__}"
-                                ) from err
+
+                    except Exception as err:  # noqa: BLE001
+                        check_exceptions(err, attempt)
                     await asyncio_sleep(self.retry_delay)
                 return None
 

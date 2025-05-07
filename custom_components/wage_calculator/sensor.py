@@ -174,7 +174,7 @@ class WageCalcSensor(ComponentEntity, SensorEntity):
     def native_unit_of_measurement(self) -> str | None:
         """Return the unit the value is expressed in."""
 
-        return self.hass.config.currency
+        return self.component_api.currency_sign
 
     # ------------------------------------------------------
     @property

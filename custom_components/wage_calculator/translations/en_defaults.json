@@ -1,6 +1,6 @@
 {
   "defaults": {
-    "default_md_today_hours_template": "and **{{ today_hours }}** hours today ",
-    "default_md_txt_template": "<font color= dodgerblue> <ha-icon icon='mdi:account-hard-hat-outline'></ha-icon></font> **{{ month_work_days_before_today }}** days {{ tmp_hours }}of the working month have passed and earned:\n&nbsp;&nbsp;&nbsp;&nbsp;**{{salery_before_today_with_hourly_update }}** {{ currency_sign }}\n\n<font color= dodgerblue> <ha-icon icon='mdi:account-hard-hat'></ha-icon></font> After the next **{{ month_work_days_after_today }}** working days, the total earnings will be:\n&nbsp;&nbsp;&nbsp;&nbsp;**{{ salary }}** {{ currency_sign }}"
+    "default_md_today_hours_monthly_template": "and **{{ today_hours }}** hours today ",
+    "default_md_txt_monthlytemplate": "<font color= green> <ha-icon icon='mdi:account-hard-hat-outline'></ha-icon></font> **{{ month_work_days_before_today }}** days {{ tmp_hours }}of the working month have passed and earned:\n&nbsp;&nbsp;&nbsp;&nbsp;**{{salery_before_today_with_hourly_update }}** {{ currency_sign }}\n\n<font color= green> <ha-icon icon='mdi:account-hard-hat'></ha-icon></font> After the next **{{ month_work_days_after_today }}** working days, the total earnings will be:\n&nbsp;&nbsp;&nbsp;&nbsp;**{{ salary }}** {{ currency_sign }}"
   }
 }
