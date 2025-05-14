@@ -29,20 +29,8 @@ from .const import (
     CONF_FLEX_HOURS,
     CONF_HOURLY_WAGE,
     CONF_UPDATE_CONTINUOUSLY,
-    CONF_WORK_HOURS_FRI,
-    CONF_WORK_HOURS_MON,
-    CONF_WORK_HOURS_SAT,
-    CONF_WORK_HOURS_SUN,
-    CONF_WORK_HOURS_THU,
-    CONF_WORK_HOURS_TUE,
-    CONF_WORK_HOURS_WED,
-    CONF_WORK_STARTS_FRI,
-    CONF_WORK_STARTS_MON,
-    CONF_WORK_STARTS_SAT,
-    CONF_WORK_STARTS_SUN,
-    CONF_WORK_STARTS_THU,
-    CONF_WORK_STARTS_TUE,
-    CONF_WORK_STARTS_WED,
+    CONF_WORK_HOURS,
+    CONF_WORK_STARTS,
     DOMAIN,
 )
 from .hass_util import NumberSelectorConfigTranslate
@@ -110,10 +98,9 @@ async def config_options_dict(handler: SchemaCommonFlowHandler) -> dict:
 # ------------------------------------------------------------------
 async def config_options_work_days_dict(handler: SchemaCommonFlowHandler) -> dict:
     """Return dict for the work days options step."""
-
-    return {
+    tmp_dict: dict = {
         vol.Required(
-            CONF_WORK_HOURS_MON,
+            CONF_WORK_HOURS + str(i),
             default=7.5,
         ): NumberSelector(
             await NumberSelectorConfigTranslate(
@@ -124,122 +111,55 @@ async def config_options_work_days_dict(handler: SchemaCommonFlowHandler) -> dic
                 mode=NumberSelectorMode.BOX,
                 unit_of_measurement="hours",
             )()
-        ),
-        vol.Required(
-            CONF_WORK_HOURS_TUE,
-            default=7.5,
-        ): NumberSelector(
-            await NumberSelectorConfigTranslate(
-                handler.parent_handler.hass,
-                min=0,
-                max=24,
-                step=0.5,
-                mode=NumberSelectorMode.BOX,
-                unit_of_measurement="hours",
-            )(),
-        ),
-        vol.Required(
-            CONF_WORK_HOURS_WED,
-            default=7.5,
-        ): NumberSelector(
-            await NumberSelectorConfigTranslate(
-                handler.parent_handler.hass,
-                min=0,
-                max=24,
-                step=0.5,
-                mode=NumberSelectorMode.BOX,
-                unit_of_measurement="hours",
-            )()
-        ),
-        vol.Required(
-            CONF_WORK_HOURS_THU,
-            default=7.5,
-        ): NumberSelector(
-            await NumberSelectorConfigTranslate(
-                handler.parent_handler.hass,
-                min=0,
-                max=24,
-                step=0.5,
-                mode=NumberSelectorMode.BOX,
-                unit_of_measurement="hours",
-            )()
-        ),
-        vol.Required(
-            CONF_WORK_HOURS_FRI,
-            default=7.5,
-        ): NumberSelector(
-            await NumberSelectorConfigTranslate(
-                handler.parent_handler.hass,
-                min=0,
-                max=24,
-                step=0.5,
-                mode=NumberSelectorMode.BOX,
-                unit_of_measurement="hours",
-            )()
-        ),
-        vol.Required(
-            CONF_WORK_HOURS_SAT,
-            default=0.0,
-        ): NumberSelector(
-            await NumberSelectorConfigTranslate(
-                handler.parent_handler.hass,
-                min=0,
-                max=24,
-                step=0.5,
-                mode=NumberSelectorMode.BOX,
-                unit_of_measurement="hours",
-            )()
-        ),
-        vol.Required(
-            CONF_WORK_HOURS_SUN,
-            default=0.0,
-        ): NumberSelector(
-            await NumberSelectorConfigTranslate(
-                handler.parent_handler.hass,
-                min=0,
-                max=24,
-                step=0.5,
-                mode=NumberSelectorMode.BOX,
-                unit_of_measurement="hours",
-            )()
-        ),
+        )
+        for i in range(5)
     }
+
+    tmp_dict.update(
+        {
+            vol.Required(
+                CONF_WORK_HOURS + str(i),
+                default=0.0,
+            ): NumberSelector(
+                await NumberSelectorConfigTranslate(
+                    handler.parent_handler.hass,
+                    min=0,
+                    max=24,
+                    step=1.0,
+                    mode=NumberSelectorMode.BOX,
+                    unit_of_measurement="hours",
+                )()
+            )
+            for i in range(5, 7)
+        }
+    )
+
+    return tmp_dict
 
 
 # ------------------------------------------------------------------
 async def config_options_work_starts_dict(handler: SchemaCommonFlowHandler) -> dict:
     """Return dict for the work starts step."""
 
-    return {
+    tmp_dict: dict = {
         vol.Required(
-            CONF_WORK_STARTS_MON,
+            CONF_WORK_STARTS + str(i),
             default="08:00:00",
-        ): TimeSelector(),
-        vol.Required(
-            CONF_WORK_STARTS_TUE,
-            default="08:00:00",
-        ): TimeSelector(),
-        vol.Required(
-            CONF_WORK_STARTS_WED,
-            default="08:00:00",
-        ): TimeSelector(),
-        vol.Required(
-            CONF_WORK_STARTS_THU,
-            default="08:00:00",
-        ): TimeSelector(),
-        vol.Required(
-            CONF_WORK_STARTS_FRI,
-            default="08:00:00",
-        ): TimeSelector(),
-        vol.Required(
-            CONF_WORK_STARTS_SAT,
-            default="00:00:00",
-        ): TimeSelector(),
-        vol.Required(
-            CONF_WORK_STARTS_SUN,
-            default="00:00:00",
-        ): TimeSelector(),
+        ): TimeSelector()
+        for i in range(5)
     }
+
+    tmp_dict.update(
+        {
+            vol.Required(
+                CONF_WORK_STARTS + str(i),
+                default="00:00:00",
+            ): TimeSelector()
+            for i in range(5, 7)
+        }
+    )
+
+    return tmp_dict
 
 
 # ------------------------------------------------------------------

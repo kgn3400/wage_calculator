@@ -1,20 +1,20 @@
 {
-    "entity": {
-        "sensor": {
-            "salary": {
-                "default": "mdi:cash-multiple"
-            }
-        }
-    },
-    "services": {
-        "flex_hours_set": {
-            "service": "mdi:equal-box"
-        },
-        "flex_hours_add": {
-            "service": "mdi:plus-box"
-        },
-        "flex_hours_subtract": {
-            "service": "mdi:minus-box"
-        }
+  "entity": {
+    "sensor": {
+      "salary": {
+        "default": "mdi:cash-multiple"
+      }
     }
+  },
+  "services": {
+    "flex_hours_set": {
+      "service": "mdi:equal-box"
+    },
+    "flex_hours_add": {
+      "service": "mdi:plus-box"
+    },
+    "flex_hours_subtract": {
+      "service": "mdi:minus-box"
+    }
+  }
 }

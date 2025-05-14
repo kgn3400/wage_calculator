@@ -70,25 +70,25 @@
       "user_work_days": {
         "title": "Timelønsberegner",
         "data": {
-          "work_hours_mon": "Arbejdstimer mandag",
-          "work_hours_tue": "Arbejdstimer tirsdag",
-          "work_hours_wed": "Arbejdstimer onsdag",
-          "work_hours_thu": "Arbejdstimer torsdag",
-          "work_hours_fri": "Arbejdstimer fredag",
-          "work_hours_sat": "Arbejdstimer lørdag",
-          "work_hours_sun": "Arbejdstimer søndag"
+          "work_hours_0": "Arbejdstimer mandag",
+          "work_hours_1": "Arbejdstimer tirsdag",
+          "work_hours_2": "Arbejdstimer onsdag",
+          "work_hours_3": "Arbejdstimer torsdag",
+          "work_hours_4": "Arbejdstimer fredag",
+          "work_hours_5": "Arbejdstimer lørdag",
+          "work_hours_6": "Arbejdstimer søndag"
         }
       },
       "user_work_starts": {
         "title": "Timelønsberegner",
         "data": {
-          "work_starts_mon": "Arbejdsstart mandag",
-          "work_starts_tue": "Arbejdsstart tirsdag",
-          "work_starts_wed": "Arbejdsstart onsdag",
-          "work_starts_thu": "Arbejdsstart torsdag",
-          "work_starts_fri": "Arbejdsstart fredag",
-          "work_starts_sat": "Arbejdsstart lørdag",
-          "work_starts_sun": "Arbejdsstart søndag"
+          "work_starts_0": "Arbejdsstart mandag",
+          "work_starts_1": "Arbejdsstart tirsdag",
+          "work_starts_2": "Arbejdsstart onsdag",
+          "work_starts_3": "Arbejdsstart torsdag",
+          "work_starts_4": "Arbejdsstart fredag",
+          "work_starts_5": "Arbejdsstart lørdag",
+          "work_starts_6": "Arbejdsstart søndag"
         }
       },
       "unit_of_measurement": {
@@ -119,25 +119,25 @@
       "init_work_days": {
         "title": "Timelønsberegner",
         "data": {
-          "work_hours_mon": "Arbejdstimer mandag",
-          "work_hours_tue": "Arbejdstimer tirsdag",
-          "work_hours_wed": "Arbejdstimer onsdag",
-          "work_hours_thu": "Arbejdstimer torsdag",
-          "work_hours_fri": "Arbejdstimer fredag",
-          "work_hours_sat": "Arbejdstimer lørdag",
-          "work_hours_sun": "Arbejdstimer søndag"
+          "work_hours_0": "Arbejdstimer mandag",
+          "work_hours_1": "Arbejdstimer tirsdag",
+          "work_hours_2": "Arbejdstimer onsdag",
+          "work_hours_3": "Arbejdstimer torsdag",
+          "work_hours_4": "Arbejdstimer fredag",
+          "work_hours_5": "Arbejdstimer lørdag",
+          "work_hours_6": "Arbejdstimer søndag"
         }
       },
       "user_work_starts": {
         "title": "Timelønsberegner",
         "data": {
-          "work_starts_mon": "Arbejdsstart mandag",
-          "work_starts_tue": "Arbejdsstart tirsdag",
-          "work_starts_wed": "Arbejdsstart onsdag",
-          "work_starts_thu": "Arbejdsstart torsdag",
-          "work_starts_fri": "Arbejdsstart fredag",
-          "work_starts_sat": "Arbejdsstart lørdag",
-          "work_starts_sun": "Arbejdsstart søndag"
+          "work_starts_0": "Arbejdsstart mandag",
+          "work_starts_1": "Arbejdsstart tirsdag",
+          "work_starts_2": "Arbejdsstart onsdag",
+          "work_starts_3": "Arbejdsstart torsdag",
+          "work_starts_4": "Arbejdsstart fredag",
+          "work_starts_5": "Arbejdsstart lørdag",
+          "work_starts_6": "Arbejdsstart søndag"
         }
       },
       "unit_of_measurement": {
