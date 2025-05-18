@@ -30,12 +30,12 @@ class WageCalc:
 
         self.hass: HomeAssistant = hass
 
-        self._weekly_work_hours: list[float] = weekly_work_hours
+        self._work_hours_week: list[float] = weekly_work_hours
 
         self._flex_hours: float = flex_hours
         self._country: str = country
         self._update_continuously: bool = update_continuously
-        self._weekly_work_starts_at: time = [
+        self._work_starts_at_week: time = [
             datetime.strptime(t, "%H:%M:%S").time() for t in weekly_work_starts_at
         ]
 
@@ -75,11 +75,42 @@ class WageCalc:
         self.holidays = country_holidays(country)
 
     # ------------------------------------------------------------------
+    def calc_todays_work(self) -> float:
+        """Calculate todays work."""
+
+        tmp_todays_work_hours: timedelta = dt_util.as_local(
+            datetime.now(UTC)
+        ) - dt_util.as_local(
+            datetime.combine(
+                date.today(),
+                self._work_starts_at_week[weekday(self.year, self.month, self.day)],
+            )
+        )
+
+        tmp_today_hours: float = tmp_todays_work_hours.total_seconds() // 3600 + (
+            int(((tmp_todays_work_hours.total_seconds() % 3600) // 60) * 1.6666666667)
+            / 100
+        )
+
+        return max(
+            0,
+            min(
+                tmp_today_hours,
+                self._work_hours_week[weekday(self.year, self.month, self.day)],
+            ),
+        )
+
+    # ------------------------------------------------------------------
     def calculate(self, year: int = 0, month: int = 0) -> None:
         """Calculate work hours."""
 
         self._same_month_year = False
-        self.today_hours = 0.0
+        self.month_work_days = 0
+        self.total_hours = 0.0
+        self.month_work_days_before_today = 0
+        self.total_hours_before_today = 0.0
+        self.month_work_days_after_today = 0
+        self.total_hours_after_today = 0.0
 
         if year == 0 or month == 0:
             self.year = date.today().year
@@ -94,54 +125,12 @@ class WageCalc:
             self.day = date.today().day
 
             if self._update_continuously:
-                tmp_todays_work_hours: timedelta = dt_util.as_local(
-                    datetime.now(UTC)
-                ) - dt_util.as_local(
-                    datetime.combine(
-                        date.today(),
-                        self._weekly_work_starts_at[
-                            weekday(self.year, self.month, self.day)
-                        ],
-                    )
-                )
+                self.today_hours = self.calc_todays_work()
 
-                self.today_hours: float = (
-                    tmp_todays_work_hours.total_seconds() // 3600
-                    + (
-                        int(
-                            ((tmp_todays_work_hours.total_seconds() % 3600) // 60)
-                            * 1.6666666667
-                        )
-                        / 100
-                    )
-                )
-
-                self.today_hours = max(
-                    0,
-                    min(
-                        self.today_hours,
-                        self._weekly_work_hours[
-                            weekday(self.year, self.month, self.day)
-                        ],
-                    ),
-                )
-
-        self.month_work_days = 0
-        self.total_hours = 0.0
-        self.month_work_days_before_today = 0
-        self.total_hours_before_today = 0.0
-        self.month_work_days_after_today = 0
-        self.total_hours_after_today = 0.0
-        self.salary = 0.0
-        self.salary_before_today = 0.0
-        self.salary_after_today = 0.0
-
-        cal = monthrange(self.year, self.month)
-
-        for day in range(1, cal[1] + 1):
+        for day in range(1, (monthrange(self.year, self.month))[1] + 1):
             if date(self.year, self.month, day) not in self.holidays:
                 if (
-                    day_work_hours := self._weekly_work_hours[
+                    day_work_hours := self._work_hours_week[
                         weekday(self.year, self.month, day)
                     ]
                 ) != 0.0:

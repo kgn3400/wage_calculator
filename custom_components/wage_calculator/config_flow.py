@@ -32,6 +32,7 @@ from .const import (
     CONF_WORK_HOURS,
     CONF_WORK_STARTS,
     DOMAIN,
+    DayOfWeekEnum,
 )
 from .hass_util import NumberSelectorConfigTranslate
 
@@ -112,7 +113,9 @@ async def config_options_work_days_dict(handler: SchemaCommonFlowHandler) -> dic
                 unit_of_measurement="hours",
             )()
         )
-        for i in range(5)
+        for i in DayOfWeekEnum.range(
+            DayOfWeekEnum.MONDAY, DayOfWeekEnum.FRIDAY, incl_stop=True
+        )
     }
 
     tmp_dict.update(
@@ -130,7 +133,9 @@ async def config_options_work_days_dict(handler: SchemaCommonFlowHandler) -> dic
                     unit_of_measurement="hours",
                 )()
             )
-            for i in range(5, 7)
+            for i in DayOfWeekEnum.range(
+                DayOfWeekEnum.SATURDAY, DayOfWeekEnum.SUNDAY, incl_stop=True
+            )
         }
     )
 
@@ -146,7 +151,9 @@ async def config_options_work_starts_dict(handler: SchemaCommonFlowHandler) -> d
             CONF_WORK_STARTS + str(i),
             default="08:00:00",
         ): TimeSelector()
-        for i in range(5)
+        for i in DayOfWeekEnum.range(
+            DayOfWeekEnum.MONDAY, DayOfWeekEnum.FRIDAY, incl_stop=True
+        )
     }
 
     tmp_dict.update(
@@ -155,7 +162,9 @@ async def config_options_work_starts_dict(handler: SchemaCommonFlowHandler) -> d
                 CONF_WORK_STARTS + str(i),
                 default="00:00:00",
             ): TimeSelector()
-            for i in range(5, 7)
+            for i in DayOfWeekEnum.range(
+                DayOfWeekEnum.SATURDAY, DayOfWeekEnum.SUNDAY, incl_stop=True
+            )
         }
     )
 

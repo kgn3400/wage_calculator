@@ -2,6 +2,8 @@
 
 from logging import Logger, getLogger
 
+from .hass_util import EnumExt
+
 DOMAIN = "wage_calculator"
 DOMAIN_NAME = "Wage calculator"
 
@@ -14,3 +16,15 @@ CONF_FLEX_HOURS = "flex_hours"
 CONF_UPDATE_CONTINUOUSLY = "update_continuously"
 CONF_WORK_HOURS = "work_hours_"
 CONF_WORK_STARTS = "work_starts_"
+
+
+class DayOfWeekEnum(EnumExt):
+    """DayOfWeekEnum."""
+
+    MONDAY = "mon"
+    TUESDAY = "tue"
+    WEDNESDAY = "wed"
+    THURSDAY = "thu"
+    FRIDAY = "fri"
+    SATURDAY = "sat"
+    SUNDAY = "sun"

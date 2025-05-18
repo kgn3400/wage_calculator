@@ -15,8 +15,6 @@ from inspect import iscoroutinefunction
 from time import sleep
 from types import FunctionType
 
-from ..const import LOGGER
-
 
 # ------------------------------------------------------
 # ------------------------------------------------------
@@ -43,13 +41,11 @@ class HandleRetriesException(Exception):
 # ------------------------------------------------------
 # ------------------------------------------------------
 class HandleRetries:
-    """Handle retries class.
+    """Decorator to handle retries.
 
-    Decorator to handle retries.
-    It will retry the function if it raises an exception up to a specified number of times, with a specified delay.
-    It can be used with both synchronous and asynchronous functions.
+    It will retry the method/function if it raises an exception up to a specified number of times, with a specified delay.
+    It can be used with both synchronous and asynchronous method/functions.
     It will raise the last exception if the number of retries is reached and raise_last_exception is True.
-
     """
 
     def __init__(
@@ -124,8 +120,6 @@ class HandleRetries:
             # -------------------------
             def check_exceptions(exp: Exception, attempt: int) -> None:
                 """Check exceptions."""
-
-                LOGGER.error("exp in reftry", exp)
 
                 if exp.__class__ == RetryStopException:
                     raise exp
@@ -283,14 +277,11 @@ def handle_retries(
     retry_on_exceptions: list | None = None,
     stop_on_exceptions: list | None = None,
 ):
-    """Handle retries.
+    """Decorator to handle retries.
 
-    Decorator to handle retries.
-    It will retry the function if it raises an exception up to a specified number of times, with a specified delay.
-    It can be used with both synchronous and asynchronous functions.
+    It will retry the method/function if it raises an exception up to a specified number of times, with a specified delay.
+    It can be used with both synchronous and asynchronous method/functions.
     It will raise the last exception if the number of retries is reached and raise_last_exception is True.
-
-
     """
 
     if func is None:

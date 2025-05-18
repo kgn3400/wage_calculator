@@ -16,6 +16,7 @@ from .const import (
     CONF_UPDATE_CONTINUOUSLY,
     CONF_WORK_HOURS,
     CONF_WORK_STARTS,
+    DayOfWeekEnum,
 )
 from .hass_util import Translate, async_hass_add_executor_job
 from .wage_calc import WageCalc
@@ -40,10 +41,13 @@ class ComponentApi:
 
         self.calc_monthly_wage: WageCalc = WageCalc(
             hass,
-            [entry.options.get(CONF_WORK_HOURS + str(i), 0.0) for i in range(7)],
+            [
+                entry.options.get(CONF_WORK_HOURS + str(i), 0.0)
+                for i in DayOfWeekEnum.range()
+            ],
             [
                 entry.options.get(CONF_WORK_STARTS + str(i), "00:00:00")
-                for i in range(7)
+                for i in DayOfWeekEnum.range()
             ],
             hourly_wage=entry.options.get(CONF_HOURLY_WAGE, 0.0),
             flex_hours=entry.options.get(CONF_FLEX_HOURS, 0.0),
