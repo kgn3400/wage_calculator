@@ -146,7 +146,10 @@ class WageCalc:
                             self.total_hours_after_today += day_work_hours
 
         self.total_hours += self._flex_hours
+        self.total_hours_before_today += self._flex_hours
+
         self.salary = self.total_hours * self.hourly_wage
+
         self.salary_before_today = self.total_hours_before_today * self.hourly_wage
         self.salery_before_today_with_hourly_update = (
             self.total_hours_before_today + self.today_hours
