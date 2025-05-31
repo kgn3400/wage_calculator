@@ -162,7 +162,8 @@ class HandleRetries:
                     return
 
                 if hasattr(func, "set_parms_dyn"):
-                    tmp_func = getattr(func, "set_parms_dyn")
+                    tmp_func = func.set_parms_dyn
+                    # tmp_func = getattr(func, "set_parms_dyn")
                     tmp_return = tmp_func()
 
                     if (
@@ -180,7 +181,8 @@ class HandleRetries:
                     return
 
                 if hasattr(func, "async_set_parms_dyn"):
-                    tmp_func = getattr(func, "async_set_parms_dyn")
+                    # tmp_func = getattr(func, "async_set_parms_dyn")
+                    tmp_func = func.async_set_parms_dyn
 
                     if iscoroutinefunction(tmp_func):
                         tmp_return = await tmp_func()
@@ -282,7 +284,7 @@ def handle_retries(
     It will retry the method/function if it raises an exception up to a specified number of times, with a specified delay.
     It can be used with both synchronous and asynchronous method/functions.
     It will raise the last exception if the number of retries is reached and raise_last_exception is True.
-    """
+    """  # noqa: D401
 
     if func is None:
         return partial(

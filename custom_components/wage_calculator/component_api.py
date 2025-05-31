@@ -75,6 +75,13 @@ class ComponentApi:
             file_name="_defaults.json",
         )
 
+        self._default_md_after_template: str = await Translate(
+            self.hass
+        ).async_get_localized_str(
+            "defaults.default_md_txt_after_template",
+            file_name="_defaults.json",
+        )
+
         self.currency_sign: str = await self.get_currency_symb()
         await self.calc_monthly_wage.async_init()
         self.markdown = await self.async_create_markdown()
@@ -138,6 +145,16 @@ class ComponentApi:
             "month_work_days_after_today": self.calc_monthly_wage.month_work_days_after_today,
             "salary": await self.format_decimal(self.calc_monthly_wage.salary),
         }
+
+        tmp_after: str = ""
+
+        if self.calc_monthly_wage.month_work_days_after_today > 0:
+            value_template: Template | None = Template(
+                self._default_md_after_template, self.hass
+            )
+            tmp_after = value_template.async_render(values)
+
+        values["tmp_after"] = tmp_after
 
         value_template: Template | None = Template(
             self._default_md_txt_template, self.hass
