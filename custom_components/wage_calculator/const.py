@@ -14,6 +14,8 @@ TRANSLATION_KEY = DOMAIN
 CONF_HOURLY_WAGE = "hourly_wage"
 CONF_FLEX_HOURS = "flex_hours"
 CONF_UPDATE_CONTINUOUSLY = "update_continuously"
+CONF_AUTO_RESET_FLEX_HOURS = "auto_reset_flex_hours"
+CONF_RESET_FLEX_DATE = "last_updated"
 CONF_WORK_HOURS = "work_hours_"
 CONF_WORK_STARTS = "work_starts_"
 

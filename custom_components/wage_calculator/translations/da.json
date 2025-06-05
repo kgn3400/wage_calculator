@@ -64,7 +64,8 @@
           "country_code": "Land",
           "hourly_wage": "Timeløn",
           "flex_hours": "Flex timer",
-          "update_continuously": "Opdater løbende"
+          "update_continuously": "Opdater løbende",
+          "auto_reset_flex_hours": "Nulstil flex timer ved måneds-skift"
         }
       },
       "user_work_days": {
@@ -113,7 +114,8 @@
           "country_code": "Land",
           "hourly_wage": "Timeløn",
           "flex_hours": "Flex timer",
-          "update_continuously": "Opdater løbende"
+          "update_continuously": "Opdater løbende",
+          "auto_reset_flex_hours": "Nulstil flex timer ved måneds-skift"
         }
       },
       "init_work_days": {

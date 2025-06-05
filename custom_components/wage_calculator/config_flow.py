@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
+from datetime import UTC, datetime
 from typing import Any, cast
 
 import voluptuous as vol
@@ -26,8 +27,10 @@ from homeassistant.helpers.selector import (
 from homeassistant.util.uuid import random_uuid_hex
 
 from .const import (
+    CONF_AUTO_RESET_FLEX_HOURS,
     CONF_FLEX_HOURS,
     CONF_HOURLY_WAGE,
+    CONF_RESET_FLEX_DATE,
     CONF_UPDATE_CONTINUOUSLY,
     CONF_WORK_HOURS,
     CONF_WORK_STARTS,
@@ -91,6 +94,10 @@ async def config_options_dict(handler: SchemaCommonFlowHandler) -> dict:
         ),
         vol.Required(
             CONF_UPDATE_CONTINUOUSLY,
+            default=True,
+        ): BooleanSelector(),
+        vol.Required(
+            CONF_AUTO_RESET_FLEX_HOURS,
             default=True,
         ): BooleanSelector(),
     }
@@ -288,3 +295,4 @@ class ConfigFlowHandler(SchemaConfigFlowHandler, domain=DOMAIN):
         The options parameter contains config entry options, which is the union of user
         input from the config flow steps.
         """
+        options[CONF_RESET_FLEX_DATE] = datetime.now(UTC).isoformat()

@@ -64,7 +64,8 @@
           "country_code": "Country",
           "hourly_wage": "Hourly wage",
           "flex_hours": "Flex hours",
-          "update_continuously": "Update continuously"
+          "update_continuously": "Update continuously",
+          "auto_reset_flex_hours": "Auto reset flex hours at turn of then month"
         }
       },
       "user_work_days": {
@@ -113,7 +114,8 @@
           "country_code": "Country",
           "hourly_wage": "Hourly wage",
           "flex_hours": "Flex hours",
-          "update_continuously": "Update continuously"
+          "update_continuously": "Update continuously",
+          "auto_reset_flex_hours": "Auto reset flex hours at turn of then month"
         }
       },
       "init_work_days": {
