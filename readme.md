@@ -4,6 +4,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/kgn3400/wage_calculator)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/kgn3400/wage_calculator)
 [![Validate% with hassfest](https://github.com/kgn3400/wage_calculator/workflows/Validate%20with%20hassfest/badge.svg)](https://github.com/kgn3400/wage_calculator/actions/workflows/hassfest.yaml)
+
 <img align="left" width="80" height="80" src="https://kgn3400.github.io/wage_calculator/assets/icon@2x.png" alt="App icon">
 
 # Wage calculator
