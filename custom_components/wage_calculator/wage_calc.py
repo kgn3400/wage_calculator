@@ -78,12 +78,12 @@ class WageCalc:
     def calc_todays_work(self) -> float:
         """Calculate todays work."""
 
-        tmp_todays_work_hours: timedelta = dt_util.as_local(
-            datetime.now(UTC)
-        ) - dt_util.as_local(
+        tmp_now: datetime = dt_util.as_local(datetime.now(UTC))
+        tmp_todays_work_hours: timedelta = tmp_now - dt_util.as_local(
             datetime.combine(
                 date.today(),
                 self._work_starts_at_week[weekday(self.year, self.month, self.day)],
+                tzinfo=tmp_now.tzinfo,
             )
         )
 

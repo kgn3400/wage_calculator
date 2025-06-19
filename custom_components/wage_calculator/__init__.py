@@ -50,7 +50,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: CommonConfigEntry) -> bo
         coordinator=coordinator,
     )
 
-    entry.async_on_unload(entry.add_update_listener(update_listener))
+    entry.async_on_unload(entry.add_update_listener(config_update_listener))
 
     await hass.config_entries.async_forward_entry_setups(entry, [Platform.SENSOR])
     return True
@@ -71,7 +71,7 @@ async def async_reload_entry(hass: HomeAssistant, entry: CommonConfigEntry) -> N
 
 
 # ------------------------------------------------------------------
-async def update_listener(
+async def config_update_listener(
     hass: HomeAssistant,
     config_entry: CommonConfigEntry,
 ) -> None:
