@@ -1,0 +1,7 @@
+{
+  "defaults": {
+    "default_md_today_hours_monthly_template": "y **{{ today_hours }}** horas de hoy",
+    "default_md_txt_monthlytemplate": "&lt;font color= green&gt; &lt;ha-icon icon=&#39;mdi:account-hard-hat-outline&#39;&gt;&lt;/ha-icon&gt;&lt;/font&gt; **{{month_work_days_before_today }}** días {{tmp_hours }} del mes laboral transcurridos y ganados:\n**{{salery_before_today_with_hourly_update }}** {{ currency_sign }} \n\n{{tmp_after }}",
+    "default_md_txt_after_template": "&lt;font color= green&gt; &lt;ha-icon icon=&#39;mdi:account-hard-hat&#39;&gt;&lt;/ha-icon&gt;&lt;/font&gt; Después de los próximos **{{month_work_days_after_today}}** días hábiles, las ganancias totales serán:\n**{{salary}}** {{currency_sign}}"
+  }
+}
