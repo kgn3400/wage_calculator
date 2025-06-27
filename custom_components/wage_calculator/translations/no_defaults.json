@@ -1,0 +1,7 @@
+{
+  "defaults": {
+    "default_md_today_hours_monthly_template": "og **{{ today_hours }}** timer i dag",
+    "default_md_txt_monthlytemplate": "&lt;font color= green&gt; &lt;ha-icon icon=&#39;mdi:account-hard-hat-outline&#39;&gt;&lt;/ha-icon&gt;&lt;/font&gt; **{{ month_work_days_before_today }}** dager {{ tmp_hours }}av arbeidsmåneden har gått og opptjent:\n&amp;nbsp;&amp;nbsp;&amp;nbsp;**{{salary_before_today_with_hourly_update }}** {{ currency_sign }} \n\n{{ tmp_after }}",
+    "default_md_txt_after_template": "&lt;font color= green&gt; &lt;ha-icon icon=&#39;mdi:account-hard-hat&#39;&gt;&lt;/ha-icon&gt;&lt;/font&gt; Etter de neste **{{ month_work_days_after_today }}** virkedagene vil den totale inntekten være:\n&amp;nbsp;&amp;nbsp;&amp;nbsp;**{{ salary }}** {{ currency_sign }}"
+  }
+}
