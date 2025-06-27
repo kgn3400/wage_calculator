@@ -1,0 +1,185 @@
+{
+  "title": "Lønnskalkulator",
+  "entity_component": {
+    "_": {
+      "name": "Lønnskalkulator"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "salary": {
+        "name": "lønn",
+        "state_attributes": {
+          "salary_before_today": {
+            "name": "Lønn før i dag"
+          },
+          "salary_after_today": {
+            "name": "Lønn etter i dag"
+          },
+          "total_hours": {
+            "name": "Totalt antall timer"
+          },
+          "total_hours_before_today": {
+            "name": "Totalt antall timer før i dag"
+          },
+          "total_hours_after_today": {
+            "name": "Totalt antall timer etter i dag"
+          },
+          "month_work_days": {
+            "name": "Månedlige arbeidsdager"
+          },
+          "month_work_days_before_today": {
+            "name": "Måneds arbeidsdager før i dag"
+          },
+          "month_work_days_after_today": {
+            "name": "Månedlige virkedager etter i dag"
+          },
+          "flex_hours": {
+            "name": "Fleksible timer"
+          },
+          "markdown": {
+            "name": "Nedsatt pris"
+          }
+        }
+      }
+    }
+  },
+  "device": {
+    "wage_calculator": {
+      "name": "Lønnskalkulator"
+    }
+  },
+  "config": {
+    "abort": {
+      "already_configured": "Enheten er allerede konfigurert"
+    },
+    "error": {
+      "unknown": "Uventet feil"
+    },
+    "step": {
+      "user": {
+        "title": "Lønnskalkulator",
+        "data": {
+          "name": "Enhetsnavn",
+          "country_code": "Land",
+          "hourly_wage": "Timelønn",
+          "flex_hours": "Fleksible timer",
+          "update_continuously": "Oppdater kontinuerlig",
+          "auto_reset_flex_hours": "Automatisk tilbakestilling av fleksible timer ved månedsskiftet"
+        }
+      },
+      "user_work_days": {
+        "title": "Lønnskalkulator",
+        "data": {
+          "work_hours_mon": "Arbeidstid mandag",
+          "work_hours_tue": "Arbeidstid tirsdag",
+          "work_hours_wed": "Arbeidstid onsdag",
+          "work_hours_thu": "Arbeidstid torsdag",
+          "work_hours_fri": "Arbeidstid fredag",
+          "work_hours_sat": "Arbeidstid lørdag",
+          "work_hours_sun": "Arbeidstid søndag"
+        }
+      },
+      "user_work_starts": {
+        "title": "Lønnskalkulator",
+        "data": {
+          "work_starts_mon": "Arbeidet starter på mandag",
+          "work_starts_tue": "Arbeidet starter tirsdag",
+          "work_starts_wed": "Arbeidet starter onsdag",
+          "work_starts_thu": "Arbeidet starter torsdag",
+          "work_starts_fri": "Arbeidet starter på fredag",
+          "work_starts_sat": "Arbeidet starter på lørdag",
+          "work_starts_sun": "Arbeidet starter på søndag"
+        }
+      },
+      "unit_of_measurement": {
+        "data": {
+          "hours": "timer",
+          "currency": "USD."
+        }
+      }
+    }
+  },
+  "options": {
+    "abort": {
+      "already_configured": "Enheten er allerede konfigurert"
+    },
+    "error": {
+      "unknown": "Uventet feil"
+    },
+    "step": {
+      "init": {
+        "title": "Lønnskalkulator",
+        "data": {
+          "country_code": "Land",
+          "hourly_wage": "Timelønn",
+          "flex_hours": "Fleksible timer",
+          "update_continuously": "Oppdater kontinuerlig",
+          "auto_reset_flex_hours": "Automatisk tilbakestilling av fleksible timer ved månedsskiftet"
+        }
+      },
+      "init_work_days": {
+        "title": "Lønnskalkulator",
+        "data": {
+          "work_hours_mon": "Arbeidstid mandag",
+          "work_hours_tue": "Arbeidstid tirsdag",
+          "work_hours_wed": "Arbeidstid onsdag",
+          "work_hours_thu": "Arbeidstid torsdag",
+          "work_hours_fri": "Arbeidstid fredag",
+          "work_hours_sat": "Arbeidstid lørdag",
+          "work_hours_sun": "Arbeidstid søndag"
+        }
+      },
+      "init_work_starts": {
+        "title": "Lønnskalkulator",
+        "data": {
+          "work_starts_mon": "Arbeidet starter på mandag",
+          "work_starts_tue": "Arbeidet starter tirsdag",
+          "work_starts_wed": "Arbeidet starter onsdag",
+          "work_starts_thu": "Arbeidet starter torsdag",
+          "work_starts_fri": "Arbeidet starter på fredag",
+          "work_starts_sat": "Arbeidet starter på lørdag",
+          "work_starts_sun": "Arbeidet starter på søndag"
+        }
+      },
+      "unit_of_measurement": {
+        "data": {
+          "hours": "timer",
+          "currency": "USD."
+        }
+      }
+    }
+  },
+  "services": {
+    "flex_hours_set": {
+      "description": "Angi fleksible timer.",
+      "name": "Sett",
+      "fields": {
+        "flex_hours": {
+          "description": "Fleksible timer.",
+          "name": "Fleksible timer"
+        }
+      }
+    },
+    "flex_hours_add": {
+      "description": "Legg til fleksible timer.",
+      "name": "Legge til",
+      "fields": {
+        "flex_hours": {
+          "description": "Fleksible timer.",
+          "name": "Fleksible timer"
+        }
+      }
+    },
+    "flex_hours_subtract": {
+      "description": "Trekk fra fleksitimer.",
+      "name": "Subtrahere",
+      "fields": {
+        "flex_hours": {
+          "description": "Fleksible timer.",
+          "name": "Fleksible timer"
+        }
+      }
+    }
+  }
+}
