@@ -127,6 +127,19 @@ class WageCalc:
             if self._update_continuously:
                 self.today_hours = self.calc_todays_work()
 
+                # Check if todays work hours is done
+                if (
+                    self.today_hours > 0
+                    and self.today_hours
+                    >= self._work_hours_week[weekday(self.year, self.month, self.day)]
+                ):
+                    self.total_hours_before_today += self._work_hours_week[
+                        weekday(self.year, self.month, self.day)
+                    ]
+                    self.today_hours = 0
+                    self.month_work_days_before_today += 1
+                    self.month_work_days_after_today -= 1
+
         for day in range(1, (monthrange(self.year, self.month))[1] + 1):
             if date(self.year, self.month, day) not in self.holidays:
                 if (

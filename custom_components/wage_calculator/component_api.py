@@ -1,8 +1,6 @@
 """Component api."""
 
 from dataclasses import dataclass
-from datetime import UTC, datetime
-from typing import Any
 
 from babel.numbers import format_decimal, get_currency_symbol
 
@@ -15,7 +13,6 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from .const import (
     CONF_FLEX_HOURS,
     CONF_HOURLY_WAGE,
-    CONF_RESET_FLEX_DATE,
     CONF_UPDATE_CONTINUOUSLY,
     CONF_WORK_HOURS,
     CONF_WORK_STARTS,
@@ -166,14 +163,14 @@ class ComponentApi:
         return value_template.async_render(values)
 
     # ------------------------------------------------------------------
-    async def update_config(self) -> None:
-        """Update config."""
+    # @set_supress_config_update_listener()
+    # async def update_config(self) -> None:
+    #     """Update config."""
 
-        tmp_options: dict[str, Any] = self.entry.options.copy()
-        tmp_options[CONF_RESET_FLEX_DATE] = datetime.now(UTC).isoformat()
-        tmp_options[CONF_FLEX_HOURS] = 0.0
-        self.supress_update_listener = True
+    #     tmp_options: dict[str, Any] = self.entry.options.copy()
+    #     tmp_options[CONF_RESET_FLEX_DATE] = datetime.now(UTC).isoformat()
+    #     tmp_options[CONF_FLEX_HOURS] = 0.0
 
-        self.hass.config_entries.async_update_entry(
-            self.entry, data=tmp_options, options=tmp_options
-        )
+    #     self.hass.config_entries.async_update_entry(
+    #         self.entry, data=tmp_options, options=tmp_options
+    #     )
