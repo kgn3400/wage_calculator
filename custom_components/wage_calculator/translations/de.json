@@ -1,0 +1,185 @@
+{
+  "title": "Lohnrechner",
+  "entity_component": {
+    "_": {
+      "name": "Lohnrechner"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "salary": {
+        "name": "Gehalt",
+        "state_attributes": {
+          "salary_before_today": {
+            "name": "Gehalt vor heute"
+          },
+          "salary_after_today": {
+            "name": "Gehalt nach heute"
+          },
+          "total_hours": {
+            "name": "Gesamtstunden"
+          },
+          "total_hours_before_today": {
+            "name": "Gesamtstunden vor heute"
+          },
+          "total_hours_after_today": {
+            "name": "Gesamtstunden nach heute"
+          },
+          "month_work_days": {
+            "name": "Monat Arbeitstage"
+          },
+          "month_work_days_before_today": {
+            "name": "Monat Arbeitstage vor heute"
+          },
+          "month_work_days_after_today": {
+            "name": "Arbeitstage im Monat nach heute"
+          },
+          "flex_hours": {
+            "name": "Flexible Arbeitszeiten"
+          },
+          "markdown": {
+            "name": "Markdown"
+          }
+        }
+      }
+    }
+  },
+  "device": {
+    "wage_calculator": {
+      "name": "Lohnrechner"
+    }
+  },
+  "config": {
+    "abort": {
+      "already_configured": "Das Gerät ist bereits konfiguriert"
+    },
+    "error": {
+      "unknown": "Unerwarteter Fehler"
+    },
+    "step": {
+      "user": {
+        "title": "Lohnrechner",
+        "data": {
+          "name": "Entitätsname",
+          "country_code": "Land",
+          "hourly_wage": "Stundenlohn",
+          "flex_hours": "Flexible Arbeitszeiten",
+          "update_continuously": "Kontinuierliche Aktualisierung",
+          "auto_reset_flex_hours": "Automatisches Zurücksetzen der Gleitzeit zum Monatswechsel"
+        }
+      },
+      "user_work_days": {
+        "title": "Lohnrechner",
+        "data": {
+          "work_hours_mon": "Arbeitszeiten Montag",
+          "work_hours_tue": "Arbeitszeiten Dienstag",
+          "work_hours_wed": "Arbeitszeit Mittwoch",
+          "work_hours_thu": "Arbeitszeiten Donnerstag",
+          "work_hours_fri": "Arbeitszeiten Freitag",
+          "work_hours_sat": "Arbeitszeit Samstag",
+          "work_hours_sun": "Arbeitszeit Sonntag"
+        }
+      },
+      "user_work_starts": {
+        "title": "Lohnrechner",
+        "data": {
+          "work_starts_mon": "Die Arbeiten beginnen am Montag",
+          "work_starts_tue": "Die Arbeiten beginnen am Dienstag",
+          "work_starts_wed": "Arbeitsbeginn ist am Mittwoch",
+          "work_starts_thu": "Beginn der Arbeiten ist am Donnerstag",
+          "work_starts_fri": "Arbeitsbeginn ist am Freitag",
+          "work_starts_sat": "Arbeitsbeginn ist Samstag",
+          "work_starts_sun": "Arbeitsbeginn ist am Sonntag"
+        }
+      },
+      "unit_of_measurement": {
+        "data": {
+          "hours": "Std.",
+          "currency": "USD."
+        }
+      }
+    }
+  },
+  "options": {
+    "abort": {
+      "already_configured": "Das Gerät ist bereits konfiguriert"
+    },
+    "error": {
+      "unknown": "Unerwarteter Fehler"
+    },
+    "step": {
+      "init": {
+        "title": "Lohnrechner",
+        "data": {
+          "country_code": "Land",
+          "hourly_wage": "Stundenlohn",
+          "flex_hours": "Flexible Arbeitszeiten",
+          "update_continuously": "Kontinuierliche Aktualisierung",
+          "auto_reset_flex_hours": "Automatisches Zurücksetzen der Gleitzeit zum Monatswechsel"
+        }
+      },
+      "init_work_days": {
+        "title": "Lohnrechner",
+        "data": {
+          "work_hours_mon": "Arbeitszeiten Montag",
+          "work_hours_tue": "Arbeitszeiten Dienstag",
+          "work_hours_wed": "Arbeitszeit Mittwoch",
+          "work_hours_thu": "Arbeitszeiten Donnerstag",
+          "work_hours_fri": "Arbeitszeiten Freitag",
+          "work_hours_sat": "Arbeitszeit Samstag",
+          "work_hours_sun": "Arbeitszeit Sonntag"
+        }
+      },
+      "init_work_starts": {
+        "title": "Lohnrechner",
+        "data": {
+          "work_starts_mon": "Die Arbeiten beginnen am Montag",
+          "work_starts_tue": "Die Arbeiten beginnen am Dienstag",
+          "work_starts_wed": "Arbeitsbeginn ist am Mittwoch",
+          "work_starts_thu": "Beginn der Arbeiten ist am Donnerstag",
+          "work_starts_fri": "Arbeitsbeginn ist am Freitag",
+          "work_starts_sat": "Arbeitsbeginn ist Samstag",
+          "work_starts_sun": "Arbeitsbeginn ist am Sonntag"
+        }
+      },
+      "unit_of_measurement": {
+        "data": {
+          "hours": "Std.",
+          "currency": "USD."
+        }
+      }
+    }
+  },
+  "services": {
+    "flex_hours_set": {
+      "description": "Legen Sie flexible Arbeitszeiten fest.",
+      "name": "Satz",
+      "fields": {
+        "flex_hours": {
+          "description": "Flexible Arbeitszeiten.",
+          "name": "Flexible Arbeitszeiten"
+        }
+      }
+    },
+    "flex_hours_add": {
+      "description": "Fügen Sie Gleitzeit hinzu.",
+      "name": "Hinzufügen",
+      "fields": {
+        "flex_hours": {
+          "description": "Flexible Arbeitszeiten.",
+          "name": "Flexible Arbeitszeiten"
+        }
+      }
+    },
+    "flex_hours_subtract": {
+      "description": "Gleitzeit abziehen.",
+      "name": "Subtrahieren",
+      "fields": {
+        "flex_hours": {
+          "description": "Flexible Arbeitszeiten.",
+          "name": "Flexible Arbeitszeiten"
+        }
+      }
+    }
+  }
+}
