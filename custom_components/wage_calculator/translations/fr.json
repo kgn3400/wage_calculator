@@ -1,0 +1,185 @@
+{
+  "title": "Calculateur de salaire",
+  "entity_component": {
+    "_": {
+      "name": "Calculateur de salaire"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "salary": {
+        "name": "salaire",
+        "state_attributes": {
+          "salary_before_today": {
+            "name": "Salaire avant aujourd'hui"
+          },
+          "salary_after_today": {
+            "name": "Salaire après aujourd'hui"
+          },
+          "total_hours": {
+            "name": "Heures totales"
+          },
+          "total_hours_before_today": {
+            "name": "Nombre total d'heures avant aujourd'hui"
+          },
+          "total_hours_after_today": {
+            "name": "Nombre total d'heures après aujourd'hui"
+          },
+          "month_work_days": {
+            "name": "Jours de travail du mois"
+          },
+          "month_work_days_before_today": {
+            "name": "Jours ouvrables du mois avant aujourd'hui"
+          },
+          "month_work_days_after_today": {
+            "name": "Jours ouvrables du mois après aujourd'hui"
+          },
+          "flex_hours": {
+            "name": "Horaires flexibles"
+          },
+          "markdown": {
+            "name": "Réduction"
+          }
+        }
+      }
+    }
+  },
+  "device": {
+    "wage_calculator": {
+      "name": "Calculateur de salaire"
+    }
+  },
+  "config": {
+    "abort": {
+      "already_configured": "L'appareil est déjà configuré"
+    },
+    "error": {
+      "unknown": "Erreur inattendue"
+    },
+    "step": {
+      "user": {
+        "title": "Calculateur de salaire",
+        "data": {
+          "name": "Nom de l'entité",
+          "country_code": "Pays",
+          "hourly_wage": "Salaire horaire",
+          "flex_hours": "Horaires flexibles",
+          "update_continuously": "Mise à jour continue",
+          "auto_reset_flex_hours": "Réinitialisation automatique des heures flexibles à la fin du mois"
+        }
+      },
+      "user_work_days": {
+        "title": "Calculateur de salaire",
+        "data": {
+          "work_hours_mon": "Horaires de travail lundi",
+          "work_hours_tue": "Horaires de travail mardi",
+          "work_hours_wed": "Horaires de travail mercredi",
+          "work_hours_thu": "Horaires de travail jeudi",
+          "work_hours_fri": "Horaires de travail vendredi",
+          "work_hours_sat": "Horaires de travail samedi",
+          "work_hours_sun": "Horaires de travail le dimanche"
+        }
+      },
+      "user_work_starts": {
+        "title": "Calculateur de salaire",
+        "data": {
+          "work_starts_mon": "Les travaux commencent lundi",
+          "work_starts_tue": "Les travaux commencent mardi",
+          "work_starts_wed": "Les travaux commencent mercredi",
+          "work_starts_thu": "Les travaux commencent jeudi",
+          "work_starts_fri": "Les travaux commencent vendredi",
+          "work_starts_sat": "Les travaux commencent samedi",
+          "work_starts_sun": "Le travail commence dimanche"
+        }
+      },
+      "unit_of_measurement": {
+        "data": {
+          "hours": "heures",
+          "currency": "dollars américains."
+        }
+      }
+    }
+  },
+  "options": {
+    "abort": {
+      "already_configured": "L'appareil est déjà configuré"
+    },
+    "error": {
+      "unknown": "Erreur inattendue"
+    },
+    "step": {
+      "init": {
+        "title": "Calculateur de salaire",
+        "data": {
+          "country_code": "Pays",
+          "hourly_wage": "Salaire horaire",
+          "flex_hours": "Horaires flexibles",
+          "update_continuously": "Mise à jour continue",
+          "auto_reset_flex_hours": "Réinitialisation automatique des heures flexibles à la fin du mois"
+        }
+      },
+      "init_work_days": {
+        "title": "Calculateur de salaire",
+        "data": {
+          "work_hours_mon": "Horaires de travail lundi",
+          "work_hours_tue": "Horaires de travail mardi",
+          "work_hours_wed": "Horaires de travail mercredi",
+          "work_hours_thu": "Horaires de travail jeudi",
+          "work_hours_fri": "Horaires de travail vendredi",
+          "work_hours_sat": "Horaires de travail samedi",
+          "work_hours_sun": "Horaires de travail le dimanche"
+        }
+      },
+      "init_work_starts": {
+        "title": "Calculateur de salaire",
+        "data": {
+          "work_starts_mon": "Les travaux commencent lundi",
+          "work_starts_tue": "Les travaux commencent mardi",
+          "work_starts_wed": "Les travaux commencent mercredi",
+          "work_starts_thu": "Les travaux commencent jeudi",
+          "work_starts_fri": "Les travaux commencent vendredi",
+          "work_starts_sat": "Les travaux commencent samedi",
+          "work_starts_sun": "Le travail commence dimanche"
+        }
+      },
+      "unit_of_measurement": {
+        "data": {
+          "hours": "heures",
+          "currency": "dollars américains."
+        }
+      }
+    }
+  },
+  "services": {
+    "flex_hours_set": {
+      "description": "Définissez des horaires flexibles.",
+      "name": "Ensemble",
+      "fields": {
+        "flex_hours": {
+          "description": "Horaires flexibles.",
+          "name": "Horaires flexibles"
+        }
+      }
+    },
+    "flex_hours_add": {
+      "description": "Ajoutez des horaires flexibles.",
+      "name": "Ajouter",
+      "fields": {
+        "flex_hours": {
+          "description": "Horaires flexibles.",
+          "name": "Horaires flexibles"
+        }
+      }
+    },
+    "flex_hours_subtract": {
+      "description": "Soustraire les heures flexibles.",
+      "name": "Soustraire",
+      "fields": {
+        "flex_hours": {
+          "description": "Horaires flexibles.",
+          "name": "Horaires flexibles"
+        }
+      }
+    }
+  }
+}
