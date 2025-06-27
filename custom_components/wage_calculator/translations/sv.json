@@ -1,0 +1,185 @@
+{
+  "title": "Löneberäknare",
+  "entity_component": {
+    "_": {
+      "name": "Löneberäknare"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "salary": {
+        "name": "lön",
+        "state_attributes": {
+          "salary_before_today": {
+            "name": "Lön före idag"
+          },
+          "salary_after_today": {
+            "name": "Lön efter idag"
+          },
+          "total_hours": {
+            "name": "Totalt antal timmar"
+          },
+          "total_hours_before_today": {
+            "name": "Totalt antal timmar före idag"
+          },
+          "total_hours_after_today": {
+            "name": "Totalt antal timmar efter idag"
+          },
+          "month_work_days": {
+            "name": "Månadsarbetsdagar"
+          },
+          "month_work_days_before_today": {
+            "name": "Månad arbetsdagar före idag"
+          },
+          "month_work_days_after_today": {
+            "name": "Månadsarbetsdagar efter idag"
+          },
+          "flex_hours": {
+            "name": "Flexibla timmar"
+          },
+          "markdown": {
+            "name": "Prissänkning"
+          }
+        }
+      }
+    }
+  },
+  "device": {
+    "wage_calculator": {
+      "name": "Löneberäknare"
+    }
+  },
+  "config": {
+    "abort": {
+      "already_configured": "Enheten är redan konfigurerad"
+    },
+    "error": {
+      "unknown": "Oväntat fel"
+    },
+    "step": {
+      "user": {
+        "title": "Löneberäknare",
+        "data": {
+          "name": "Enhetsnamn",
+          "country_code": "Land",
+          "hourly_wage": "Timlön",
+          "flex_hours": "Flexibla timmar",
+          "update_continuously": "Uppdatera kontinuerligt",
+          "auto_reset_flex_hours": "Automatisk återställning av flextimmar vid månadsskiftet"
+        }
+      },
+      "user_work_days": {
+        "title": "Löneberäknare",
+        "data": {
+          "work_hours_mon": "Arbetstid måndag",
+          "work_hours_tue": "Arbetstid tisdag",
+          "work_hours_wed": "Arbetstid onsdag",
+          "work_hours_thu": "Arbetstid torsdag",
+          "work_hours_fri": "Arbetstid fredag",
+          "work_hours_sat": "Arbetstid lördag",
+          "work_hours_sun": "Arbetstid söndag"
+        }
+      },
+      "user_work_starts": {
+        "title": "Löneberäknare",
+        "data": {
+          "work_starts_mon": "Arbetet börjar på måndag",
+          "work_starts_tue": "Arbetet börjar på tisdag",
+          "work_starts_wed": "Arbetet börjar på onsdag",
+          "work_starts_thu": "Arbetet börjar på torsdag",
+          "work_starts_fri": "Arbetet börjar på fredag",
+          "work_starts_sat": "Arbetet börjar på lördag",
+          "work_starts_sun": "Arbetet börjar på söndag"
+        }
+      },
+      "unit_of_measurement": {
+        "data": {
+          "hours": "timmar",
+          "currency": "USD."
+        }
+      }
+    }
+  },
+  "options": {
+    "abort": {
+      "already_configured": "Enheten är redan konfigurerad"
+    },
+    "error": {
+      "unknown": "Oväntat fel"
+    },
+    "step": {
+      "init": {
+        "title": "Löneberäknare",
+        "data": {
+          "country_code": "Land",
+          "hourly_wage": "Timlön",
+          "flex_hours": "Flexibla timmar",
+          "update_continuously": "Uppdatera kontinuerligt",
+          "auto_reset_flex_hours": "Automatisk återställning av flextimmar vid månadsskiftet"
+        }
+      },
+      "init_work_days": {
+        "title": "Löneberäknare",
+        "data": {
+          "work_hours_mon": "Arbetstid måndag",
+          "work_hours_tue": "Arbetstid tisdag",
+          "work_hours_wed": "Arbetstid onsdag",
+          "work_hours_thu": "Arbetstid torsdag",
+          "work_hours_fri": "Arbetstid fredag",
+          "work_hours_sat": "Arbetstid lördag",
+          "work_hours_sun": "Arbetstid söndag"
+        }
+      },
+      "init_work_starts": {
+        "title": "Löneberäknare",
+        "data": {
+          "work_starts_mon": "Arbetet börjar på måndag",
+          "work_starts_tue": "Arbetet börjar på tisdag",
+          "work_starts_wed": "Arbetet börjar på onsdag",
+          "work_starts_thu": "Arbetet börjar på torsdag",
+          "work_starts_fri": "Arbetet börjar på fredag",
+          "work_starts_sat": "Arbetet börjar på lördag",
+          "work_starts_sun": "Arbetet börjar på söndag"
+        }
+      },
+      "unit_of_measurement": {
+        "data": {
+          "hours": "timmar",
+          "currency": "USD."
+        }
+      }
+    }
+  },
+  "services": {
+    "flex_hours_set": {
+      "description": "Ställ in flexibla timmar.",
+      "name": "Uppsättning",
+      "fields": {
+        "flex_hours": {
+          "description": "Flexibla timmar.",
+          "name": "Flexibla timmar"
+        }
+      }
+    },
+    "flex_hours_add": {
+      "description": "Lägg till flextimmar.",
+      "name": "Tillägga",
+      "fields": {
+        "flex_hours": {
+          "description": "Flexibla timmar.",
+          "name": "Flexibla timmar"
+        }
+      }
+    },
+    "flex_hours_subtract": {
+      "description": "Subtrahera flextimmar.",
+      "name": "Subtrahera",
+      "fields": {
+        "flex_hours": {
+          "description": "Flexibla timmar.",
+          "name": "Flexibla timmar"
+        }
+      }
+    }
+  }
+}
