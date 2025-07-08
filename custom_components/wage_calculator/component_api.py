@@ -161,16 +161,3 @@ class ComponentApi:
         )
 
         return value_template.async_render(values)
-
-    # ------------------------------------------------------------------
-    # @set_supress_config_update_listener()
-    # async def update_config(self) -> None:
-    #     """Update config."""
-
-    #     tmp_options: dict[str, Any] = self.entry.options.copy()
-    #     tmp_options[CONF_RESET_FLEX_DATE] = datetime.now(UTC).isoformat()
-    #     tmp_options[CONF_FLEX_HOURS] = 0.0
-
-    #     self.hass.config_entries.async_update_entry(
-    #         self.entry, data=tmp_options, options=tmp_options
-    #     )
