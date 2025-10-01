@@ -1,6 +1,8 @@
 """Component api."""
 
 from dataclasses import dataclass
+from datetime import UTC, datetime
+from typing import Any
 
 from babel.numbers import format_decimal, get_currency_symbol
 
@@ -11,8 +13,10 @@ from homeassistant.helpers.template import Template
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 from .const import (
+    CONF_AUTO_RESET_FLEX_HOURS,
     CONF_FLEX_HOURS,
     CONF_HOURLY_WAGE,
+    CONF_RESET_FLEX_DATE,
     CONF_UPDATE_CONTINUOUSLY,
     CONF_WORK_HOURS,
     CONF_WORK_STARTS,
@@ -102,6 +106,24 @@ class ComponentApi:
         self.calc_monthly_wage.calculate()
 
         self.markdown = await self.async_create_markdown()
+
+        if (
+            self.entry.options.get(CONF_AUTO_RESET_FLEX_HOURS, False)
+            and datetime.now(UTC).day == 1
+            and datetime.now(UTC).month
+            != int(
+                str(self.entry.options.get(CONF_RESET_FLEX_DATE, "0000-00-00")).split(
+                    "-"
+                )[1]
+            )
+        ):
+            tmp_options: dict[str, Any] = self.entry.options.copy()
+            tmp_options[CONF_FLEX_HOURS] = 0
+            tmp_options[CONF_RESET_FLEX_DATE] = datetime.now(UTC).strftime("%Y-%m-%d")
+
+            self.hass.config_entries.async_update_entry(
+                self.entry, data=tmp_options, options=tmp_options
+            )
 
     @async_hass_add_executor_job()
     # ------------------------------------------------------------------

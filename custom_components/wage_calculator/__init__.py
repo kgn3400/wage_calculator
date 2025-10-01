@@ -35,6 +35,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: CommonConfigEntry) -> bo
         hass,
         LOGGER,
         name=DOMAIN,
+        config_entry=entry,
     )
 
     component_api: ComponentApi = ComponentApi(

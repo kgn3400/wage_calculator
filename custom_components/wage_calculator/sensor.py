@@ -97,7 +97,7 @@ class WageCalcSensor(ComponentEntity, SensorEntity):
         )
 
         self.coordinator.update_method = self.async_refresh
-        self.coordinator.update_interval = timedelta(minutes=15)
+        self.coordinator.update_interval = timedelta(minutes=1)
 
     # ------------------------------------------------------------------
     async def async_flex_hours_set(
